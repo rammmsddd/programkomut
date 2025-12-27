@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/program.dart';
 import '../theme/app_colors.dart';
 
@@ -106,23 +106,30 @@ class ProgramCard extends StatelessWidget {
                                 : const Color(0xFFF9FAFB),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: CachedNetworkImage(
-                            imageUrl: program.imageUrl,
-                            fit: BoxFit.contain,
-                            placeholder: (context, url) => const Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
+                          child: program.imageUrl.endsWith('.svg')
+                              ? SvgPicture.asset(
+                                  program.imageUrl,
+                                  fit: BoxFit.contain,
+                                  placeholderBuilder: (context) => const Center(
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Image.asset(
+                                  program.imageUrl,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Icon(
+                                      Icons.apps,
+                                      color: theme.colorScheme.primary,
+                                    );
+                                  },
                                 ),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Icon(
-                              Icons.apps,
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
                         ),
 
                         const SizedBox(height: 16),

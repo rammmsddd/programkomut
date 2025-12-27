@@ -234,7 +234,11 @@ class CommandListingScreen extends StatelessWidget {
                         command: command,
                         isShortcutMode: appState.isShortcutMode,
                         isFavorite: appState.isCommandFavorite(command.id),
-                        onTap: () => appState.selectCommand(command),
+                        onTap: () => appState.selectCommand(
+                          command,
+                          programName: program.name,
+                          programLogo: program.imageUrl,
+                        ),
                         onFavoriteTap: () =>
                             appState.toggleFavoriteCommand(command.id),
                         index: index,
@@ -275,131 +279,109 @@ class _CommandListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child:
-          Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCardBackground : Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: isDark
-                        ? AppColors.darkBorder
-                        : AppColors.lightBorder,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.03),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkCardBackground : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Row(
+                children: isShortcutMode
+                    ? [
+                        // Shortcut first
+                        Text(
+                          command.shortcut,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.accentBlue,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            command.name,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ]
+                    : [
+                        // Name first
+                        Expanded(
+                          child: Text(
+                            command.name,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: isDark
+                                  ? AppColors.darkTextPrimary
+                                  : AppColors.lightTextPrimary,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.accentBlue.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            command.shortcut,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.accentBlue,
+                            ),
+                          ),
+                        ),
+                      ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            GestureDetector(
+              onTap: onFavoriteTap,
+              behavior: HitTestBehavior.opaque,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Icon(
+                  isFavorite ? Icons.star : Icons.star_border,
+                  color: isFavorite
+                      ? AppColors.favoriteYellow
+                      : (isDark
+                            ? AppColors.darkBorder
+                            : const Color(0xFFE5E7EB)),
+                  size: 24,
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: isShortcutMode
-                            ? [
-                                // Shortcut first
-                                Text(
-                                  command.shortcut,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w900,
-                                    color: AppColors.accentBlue,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    command.name,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
-                                      color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.lightTextSecondary,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ]
-                            : [
-                                // Name first
-                                Expanded(
-                                  child: Text(
-                                    command.name,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      color: isDark
-                                          ? AppColors.darkTextPrimary
-                                          : AppColors.lightTextPrimary,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.accentBlue.withOpacity(
-                                      0.1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    command.shortcut,
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w900,
-                                      color: AppColors.accentBlue,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: onFavoriteTap,
-                      behavior: HitTestBehavior.opaque,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child:
-                            Icon(
-                                  isFavorite ? Icons.star : Icons.star_border,
-                                  color: isFavorite
-                                      ? AppColors.favoriteYellow
-                                      : (isDark
-                                            ? AppColors.darkBorder
-                                            : const Color(0xFFE5E7EB)),
-                                  size: 24,
-                                )
-                                .animate(target: isFavorite ? 1 : 0)
-                                .scale(
-                                  begin: const Offset(0.5, 0.5),
-                                  end: const Offset(1.2, 1.2),
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.elasticOut,
-                                )
-                                .then()
-                                .scale(
-                                  begin: const Offset(1.2, 1.2),
-                                  end: const Offset(1.0, 1.0),
-                                  duration: const Duration(milliseconds: 150),
-                                ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-              .animate(delay: Duration(milliseconds: index * 30))
-              .fadeIn(duration: 300.ms)
-              .slideY(begin: 0.2, end: 0, curve: Curves.easeOut),
-    );
+              ),
+            ),
+          ],
+        ),
+      ),
+    ).animate().fadeIn(duration: 300.ms);
   }
 }

@@ -24,9 +24,7 @@ class BottomNavigation extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.black.withOpacity(0.8)
-            : Colors.white.withOpacity(0.8),
+        color: isDark ? Colors.black : Colors.white,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(32),
           topRight: Radius.circular(32),
@@ -46,7 +44,7 @@ class BottomNavigation extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -103,7 +101,7 @@ class _NavItem extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
         decoration: BoxDecoration(
           color: isActive
               ? theme.colorScheme.primary.withOpacity(0.1)
@@ -118,7 +116,7 @@ class _NavItem extends StatelessWidget {
                   color: isActive
                       ? theme.colorScheme.primary
                       : theme.textTheme.bodyMedium?.color,
-                  size: 28,
+                  size: 30,
                 )
                 .animate(target: isActive ? 1 : 0)
                 .scale(
@@ -126,7 +124,7 @@ class _NavItem extends StatelessWidget {
                   end: const Offset(1.1, 1.1),
                   duration: const Duration(milliseconds: 200),
                 ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 0),
             Text(
               label,
               style: theme.textTheme.labelSmall?.copyWith(
@@ -135,6 +133,7 @@ class _NavItem extends StatelessWidget {
                     : theme.textTheme.bodyMedium?.color,
                 fontWeight: isActive ? FontWeight.w900 : FontWeight.w600,
                 letterSpacing: 0.5,
+                fontSize: 10,
               ),
             ),
           ],

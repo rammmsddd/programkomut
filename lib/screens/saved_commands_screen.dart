@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../providers/app_state_provider.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
@@ -149,7 +149,11 @@ class SavedCommandsScreen extends StatelessWidget {
                       final programLogo = item['programLogo'];
 
                       return GestureDetector(
-                        onTap: () => appState.selectCommand(command),
+                        onTap: () => appState.selectCommand(
+                          command,
+                          programName: programName,
+                          programLogo: programLogo,
+                        ),
                         child:
                             Container(
                                   margin: const EdgeInsets.only(bottom: 14),
@@ -192,10 +196,21 @@ class SavedCommandsScreen extends StatelessWidget {
                                                 : AppColors.lightBorder,
                                           ),
                                         ),
-                                        child: CachedNetworkImage(
-                                          imageUrl: programLogo,
-                                          fit: BoxFit.contain,
-                                        ),
+                                        child: programLogo.endsWith('.svg')
+                                            ? SvgPicture.asset(
+                                                programLogo,
+                                                fit: BoxFit.contain,
+                                              )
+                                            : Image.asset(
+                                                programLogo,
+                                                fit: BoxFit.contain,
+                                                errorBuilder:
+                                                    (
+                                                      context,
+                                                      error,
+                                                      stackTrace,
+                                                    ) => const Icon(Icons.apps),
+                                              ),
                                       ),
                                       const SizedBox(width: 16),
                                       // Command Info

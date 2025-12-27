@@ -11,6 +11,8 @@ class AppStateProvider with ChangeNotifier {
   AppScreen _currentScreen = AppScreen.home;
   Program? _selectedProgram;
   Command? _selectedCommand;
+  String? _selectedProgramName;
+  String? _selectedProgramLogo;
 
   // User Preferences
   List<String> _favoriteProgramIds = [];
@@ -27,6 +29,8 @@ class AppStateProvider with ChangeNotifier {
   AppScreen get currentScreen => _currentScreen;
   Program? get selectedProgram => _selectedProgram;
   Command? get selectedCommand => _selectedCommand;
+  String? get selectedProgramName => _selectedProgramName;
+  String? get selectedProgramLogo => _selectedProgramLogo;
   List<String> get favoriteProgramIds => _favoriteProgramIds;
   List<String> get favoriteCommandIds => _favoriteCommandIds;
   Map<String, String> get notes => _notes;
@@ -80,8 +84,23 @@ class AppStateProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void selectCommand(Command? command) {
+  void selectCommand(
+    Command? command, {
+    String? programName,
+    String? programLogo,
+  }) {
     _selectedCommand = command;
+    if (command != null) {
+      // If explicit program info is passed (e.g. from Saved screen), use it
+      if (programName != null) _selectedProgramName = programName;
+      if (programLogo != null)
+        _selectedProgramLogo = programLogo;
+      // If not, fall back to currently selected program (from Listing screen)
+      else if (_selectedProgram != null) {
+        _selectedProgramName = _selectedProgram!.name;
+        _selectedProgramLogo = _selectedProgram!.imageUrl;
+      }
+    }
     notifyListeners();
   }
 

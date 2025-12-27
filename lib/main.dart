@@ -9,6 +9,7 @@ import 'widgets/bottom_navigation.dart';
 import 'widgets/command_detail_sheet.dart';
 import 'theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
+import 'models/command.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: const MainScreen(),
+      home: const _CommandDetailObserver(child: MainScreen()),
     );
   }
 }
@@ -112,6 +113,8 @@ class _CommandDetailObserver extends StatefulWidget {
 }
 
 class _CommandDetailObserverState extends State<_CommandDetailObserver> {
+  Command? _visibleCommand;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -119,8 +122,9 @@ class _CommandDetailObserverState extends State<_CommandDetailObserver> {
     final appState = context.watch<AppStateProvider>();
     final selectedCommand = appState.selectedCommand;
 
-    // Show command detail sheet when command is selected
-    if (selectedCommand != null) {
+    // Show command detail sheet when command is selected, but only if it's not already visible
+    if (selectedCommand != null && selectedCommand != _visibleCommand) {
+      _visibleCommand = selectedCommand;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showModalBottomSheet(
           context: context,
@@ -128,13 +132,16 @@ class _CommandDetailObserverState extends State<_CommandDetailObserver> {
           backgroundColor: Colors.transparent,
           builder: (context) => CommandDetailSheet(command: selectedCommand),
         ).then((_) {
-          // Clear selected command when sheet is dismissed
+          // Clear visible command when sheet is dismissed
+          _visibleCommand = null;
           if (mounted &&
               context.read<AppStateProvider>().selectedCommand != null) {
             context.read<AppStateProvider>().selectCommand(null);
           }
         });
       });
+    } else if (selectedCommand == null) {
+      _visibleCommand = null;
     }
   }
 
