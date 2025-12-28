@@ -190,14 +190,14 @@ class CommandIcon extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            programColor.withOpacity(0.15),
-            programColor.withOpacity(0.08),
+            programColor.withValues(alpha: 0.15),
+            programColor.withValues(alpha: 0.08),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(size * 0.25),
-        border: Border.all(color: programColor.withOpacity(0.3), width: 1),
+        border: Border.all(color: programColor.withValues(alpha: 0.3), width: 1),
       ),
       child: CustomPaint(size: Size(size, size), painter: painter),
     );

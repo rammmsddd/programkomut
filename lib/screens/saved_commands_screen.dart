@@ -77,7 +77,7 @@ class SavedCommandsScreen extends StatelessWidget {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
+                              color: Colors.black.withValues(alpha: 0.05),
                               blurRadius: 10,
                               offset: const Offset(0, 2),
                             ),
@@ -111,7 +111,7 @@ class SavedCommandsScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              const Color(0xFF8B5CF6).withOpacity(0.8),
+                              const Color(0xFF8B5CF6).withValues(alpha: 0.8),
                               const Color(0xFF6366F1),
                             ],
                             begin: Alignment.topLeft,
@@ -120,7 +120,7 @@ class SavedCommandsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF6366F1).withOpacity(0.3),
+                              color: const Color(0xFF6366F1).withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 2),
                             ),
@@ -213,7 +213,7 @@ class SavedCommandsScreen extends StatelessWidget {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.03),
+                                        color: Colors.black.withValues(alpha: 0.03),
                                         blurRadius: 8,
                                         offset: const Offset(0, 2),
                                       ),
@@ -230,7 +230,7 @@ class SavedCommandsScreen extends StatelessWidget {
                                             colors: [
                                               const Color(
                                                 0xFF6366F1,
-                                              ).withOpacity(0.8),
+                                              ).withValues(alpha: 0.8),
                                               const Color(0xFF6366F1),
                                             ],
                                             begin: Alignment.topLeft,
@@ -243,7 +243,7 @@ class SavedCommandsScreen extends StatelessWidget {
                                             BoxShadow(
                                               color: const Color(
                                                 0xFF6366F1,
-                                              ).withOpacity(0.3),
+                                              ).withValues(alpha: 0.3),
                                               blurRadius: 6,
                                               offset: const Offset(0, 2),
                                             ),
@@ -355,7 +355,7 @@ class SavedCommandsScreen extends StatelessWidget {
                                                     ),
                                                     duration: 1500.ms,
                                                     color: Colors.white
-                                                        .withOpacity(0.3),
+                                                        .withValues(alpha: 0.3),
                                                   ),
                                         ),
                                       ),

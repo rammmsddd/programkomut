@@ -41,7 +41,7 @@ class ProgramCard extends StatelessWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -101,7 +101,7 @@ class ProgramCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                program.brandColor.withOpacity(0.8),
+                                program.brandColor.withValues(alpha: 0.8),
                                 program.brandColor,
                               ],
                               begin: Alignment.topLeft,
@@ -110,7 +110,7 @@ class ProgramCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: program.brandColor.withOpacity(0.3),
+                                color: program.brandColor.withValues(alpha: 0.3),
                                 blurRadius: 8,
                                 offset: const Offset(0, 4),
                               ),
@@ -125,7 +125,7 @@ class ProgramCard extends StatelessWidget {
                                 color: Colors.white,
                                 shadows: [
                                   Shadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withValues(alpha: 0.2),
                                     offset: const Offset(0, 2),
                                     blurRadius: 4,
                                   ),
@@ -161,7 +161,7 @@ class ProgramCard extends StatelessWidget {
         .shimmer(
           delay: Duration(milliseconds: 2000 + (index * 100)),
           duration: const Duration(milliseconds: 1000),
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
         );
   }
 }

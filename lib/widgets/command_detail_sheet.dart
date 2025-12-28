@@ -87,7 +87,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          const Color(0xFF6366F1).withOpacity(0.8),
+                          const Color(0xFF6366F1).withValues(alpha: 0.8),
                           const Color(0xFF6366F1),
                         ],
                         begin: Alignment.topLeft,
@@ -96,7 +96,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6366F1).withOpacity(0.3),
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -149,7 +149,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: isDark
-                            ? Colors.white.withOpacity(0.05)
+                            ? Colors.white.withValues(alpha: 0.05)
                             : const Color(0xFFF3F4F6),
                         shape: BoxShape.circle,
                       ),
@@ -260,7 +260,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                     widget.command.getDescription(appState.languageCode),
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: isDark
-                          ? Colors.white.withOpacity(0.9)
+                          ? Colors.white.withValues(alpha: 0.9)
                           : const Color(0xFF374151),
                       height: 1.5,
                       fontSize: 16,
@@ -285,7 +285,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                   Container(
                     decoration: BoxDecoration(
                       color: isDark
-                          ? Colors.white.withOpacity(0.02)
+                          ? Colors.white.withValues(alpha: 0.02)
                           : Colors.grey[50],
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
@@ -394,7 +394,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                         height: 56,
                         decoration: BoxDecoration(
                           color: isFavorite
-                              ? AppColors.favoriteYellow.withOpacity(0.1)
+                              ? AppColors.favoriteYellow.withValues(alpha: 0.1)
                               : (isDark
                                     ? const Color(0xFF1F2937)
                                     : const Color(0xFFF3F4F6)),

@@ -16,7 +16,7 @@ abstract class CommandPainter extends CustomPainter {
     ..strokeJoin = StrokeJoin.round;
 
   Paint get fillPaint => Paint()
-    ..color = color.withOpacity(0.2)
+    ..color = color.withValues(alpha: 0.2)
     ..style = PaintingStyle.fill;
 
   @override

@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
+                    color: Colors.black.withValues(alpha: 0.15),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                               t.translate('subtitle'),
                               style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                                 height: 1.4,
                               ),
                               maxLines: 2,
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Icon(
                         Icons.language_rounded,
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         size: 40,
                       )
                       .animate(
@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                const Color(0xFF8B5CF6).withOpacity(0.8),
+                                const Color(0xFF8B5CF6).withValues(alpha: 0.8),
                                 const Color(0xFF6366F1),
                               ],
                               begin: Alignment.topLeft,
@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(24),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF6366F1).withOpacity(0.3),
+                                color: const Color(0xFF6366F1).withValues(alpha: 0.3),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),
@@ -147,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 48,
                                 height: 48,
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
+                                  color: Colors.white.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
                                 child: const Icon(
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                                       '${appState.collections.length} collection${appState.collections.length != 1 ? 's' : ''}',
                                       style: TextStyle(
                                         fontSize: 13,
-                                        color: Colors.white.withOpacity(0.9),
+                                        color: Colors.white.withValues(alpha: 0.9),
                                       ),
                                     ),
                                   ],

@@ -117,7 +117,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppColors.accentBlue.withOpacity(0.1)
+                            ? AppColors.accentBlue.withValues(alpha: 0.1)
                             : (isDark
                                   ? AppColors.darkBackground
                                   : const Color(0xFFF9FAFB)),

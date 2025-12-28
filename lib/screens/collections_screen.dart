@@ -197,7 +197,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.03),
+                                      color: Colors.black.withValues(alpha: 0.03),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),
@@ -224,7 +224,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                         boxShadow: [
                                           BoxShadow(
                                             color: AppColors.accentBlue
-                                                .withOpacity(0.3),
+                                                .withValues(alpha: 0.3),
                                             blurRadius: 6,
                                             offset: const Offset(0, 2),
                                           ),

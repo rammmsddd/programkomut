@@ -97,8 +97,9 @@ class AppStateProvider with ChangeNotifier {
     _selectedCommand = command;
     if (command != null) {
       // If explicit program info is passed (e.g. from Saved screen), use it
-      if (programName != null)
+      if (programName != null) {
         _selectedProgramName = programName;
+      }
       // If not, fall back to currently selected program (from Listing screen)
       else if (_selectedProgram != null) {
         _selectedProgramName = _selectedProgram!.name;
