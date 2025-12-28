@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../providers/app_state_provider.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
@@ -146,13 +145,11 @@ class SavedCommandsScreen extends StatelessWidget {
                       final item = savedCommands[index];
                       final command = item['command'];
                       final programName = item['programName'];
-                      final programLogo = item['programLogo'];
 
                       return GestureDetector(
                         onTap: () => appState.selectCommand(
                           command,
                           programName: programName,
-                          programLogo: programLogo,
                         ),
                         child:
                             Container(
@@ -178,39 +175,44 @@ class SavedCommandsScreen extends StatelessWidget {
                                   ),
                                   child: Row(
                                     children: [
-                                      // Program Logo
+                                      // Program Initial Letter
                                       Container(
                                         width: 48,
                                         height: 48,
-                                        padding: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
-                                          color: isDark
-                                              ? AppColors.darkBorder
-                                              : const Color(0xFFF9FAFB),
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              const Color(
+                                                0xFF6366F1,
+                                              ).withOpacity(0.8),
+                                              const Color(0xFF6366F1),
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
                                           borderRadius: BorderRadius.circular(
                                             16,
                                           ),
-                                          border: Border.all(
-                                            color: isDark
-                                                ? const Color(0xFF4B5563)
-                                                : AppColors.lightBorder,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: const Color(
+                                                0xFF6366F1,
+                                              ).withOpacity(0.3),
+                                              blurRadius: 6,
+                                              offset: const Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            programName[0].toUpperCase(),
+                                            style: const TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
-                                        child: programLogo.endsWith('.svg')
-                                            ? SvgPicture.asset(
-                                                programLogo,
-                                                fit: BoxFit.contain,
-                                              )
-                                            : Image.asset(
-                                                programLogo,
-                                                fit: BoxFit.contain,
-                                                errorBuilder:
-                                                    (
-                                                      context,
-                                                      error,
-                                                      stackTrace,
-                                                    ) => const Icon(Icons.apps),
-                                              ),
                                       ),
                                       const SizedBox(width: 16),
                                       // Command Info

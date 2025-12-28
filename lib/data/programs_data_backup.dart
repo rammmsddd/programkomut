@@ -2,18 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/program.dart';
 import '../models/command.dart';
 
-// Import all program command files
-import 'programs/photoshop_commands.dart';
-import 'programs/blender_commands.dart';
-import 'programs/sketchup_commands.dart';
-import 'programs/illustrator_commands.dart';
-import 'programs/revit_commands.dart';
-import 'programs/max_commands.dart';
-import 'programs/maya_commands.dart';
-import 'programs/cinema4d_commands.dart';
-import 'programs/rhino_commands.dart';
-import 'programs/remaining_programs.dart';
-
 final List<Program> programs = [
   Program(
     id: 'autocad',
@@ -799,24 +787,390 @@ final List<Program> programs = [
       ),
     ],
   ),
-
-  // ===========================================
-  // ALL PROGRAMS WITH COMPREHENSIVE COMMANDS
-  // ===========================================
-  photoshopProgram,
-  blenderProgram,
-  sketchupProgram,
-  illustratorProgram,
-  revitProgram,
-  maxProgram,
-  mayaProgram,
-  cinema4dProgram,
-  rhinoProgram,
-  solidworksProgram,
-  fusion360Program,
-  archicadProgram,
-  vectorworksProgram,
-  zbrushProgram,
-  lumionProgram,
-  indesignProgram,
+  Program(
+    id: 'sketchup',
+    name: 'SketchUp',
+    brandColor: const Color(0xFF005F9E), // SketchUp blue
+    commands: [
+      Command(
+        id: 'sk-push',
+        name: 'PUSH/PULL',
+        shortcut: 'P',
+        breadcrumb: 'Toolbar > Push/Pull',
+        description: 'Yüzeyleri iterek veya çekerek 3D hacim oluşturur.',
+      ),
+      Command(
+        id: 'sk-line',
+        name: 'LINE',
+        shortcut: 'L',
+        breadcrumb: 'Toolbar > Line',
+        description: 'İki nokta arasında doğru parçası çizer.',
+      ),
+      Command(
+        id: 'sk-move',
+        name: 'MOVE',
+        shortcut: 'M',
+        breadcrumb: 'Toolbar > Move',
+        description: 'Objeleri taşır veya kopyalar.',
+      ),
+      Command(
+        id: 'sk-rotate',
+        name: 'ROTATE',
+        shortcut: 'Q',
+        breadcrumb: 'Toolbar > Rotate',
+        description: 'Objeleri döndürür.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'blender',
+    name: 'Blender',
+    brandColor: const Color(0xFFE87D0D), // Blender orange
+    commands: [
+      Command(
+        id: 'bl-extrude',
+        name: 'EXTRUDE',
+        shortcut: 'E',
+        breadcrumb: 'Edit Mode > Edge/Face > Extrude',
+        description:
+            'Seçili yüzeyi veya kenarı dışarıya veya içeriye doğru uzatır.',
+      ),
+      Command(
+        id: 'bl-move',
+        name: 'MOVE',
+        shortcut: 'G',
+        breadcrumb: 'Transform > Grab',
+        description: 'Seçili nesneleri serbestçe taşır.',
+      ),
+      Command(
+        id: 'bl-rotate',
+        name: 'ROTATE',
+        shortcut: 'R',
+        breadcrumb: 'Transform > Rotate',
+        description: 'Seçili nesneleri döndürür.',
+      ),
+      Command(
+        id: 'bl-scale',
+        name: 'SCALE',
+        shortcut: 'S',
+        breadcrumb: 'Transform > Scale',
+        description: 'Seçili nesneleri ölçeklendirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'revit',
+    name: 'Revit',
+    brandColor: const Color(0xFF1565C0), // Revit blue
+    commands: [
+      Command(
+        id: 'rv-wall',
+        name: 'WALL',
+        shortcut: 'WA',
+        breadcrumb: 'Architecture > Wall',
+        description: 'Mimari duvar elemanları oluşturur.',
+      ),
+      Command(
+        id: 'rv-door',
+        name: 'DOOR',
+        shortcut: 'DR',
+        breadcrumb: 'Architecture > Door',
+        description: 'Duvarlara kapı yerleştirir.',
+      ),
+      Command(
+        id: 'rv-window',
+        name: 'WINDOW',
+        shortcut: 'WN',
+        breadcrumb: 'Architecture > Window',
+        description: 'Duvarlara pencere yerleştirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: '3dsmax',
+    name: '3ds Max',
+    brandColor: const Color(0xFF00A88F), // 3ds Max teal
+    commands: [
+      Command(
+        id: '3d-move',
+        name: 'MOVE',
+        shortcut: 'W',
+        breadcrumb: 'Toolbar > Move',
+        description: 'Nesneleri X, Y veya Z eksenlerinde taşır.',
+      ),
+      Command(
+        id: '3d-rotate',
+        name: 'ROTATE',
+        shortcut: 'E',
+        breadcrumb: 'Toolbar > Rotate',
+        description: 'Nesneleri döndürür.',
+      ),
+      Command(
+        id: '3d-scale',
+        name: 'SCALE',
+        shortcut: 'R',
+        breadcrumb: 'Toolbar > Scale',
+        description: 'Nesneleri ölçeklendirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'rhino',
+    name: 'Rhino 3D',
+    brandColor: const Color(0xFF8C8C8C), // Rhino gray
+    commands: [
+      Command(
+        id: 'rh-poly',
+        name: 'POLYLINE',
+        shortcut: 'PLine',
+        breadcrumb: 'Curve > Polyline',
+        description: 'Ardışık doğru parçalarından oluşan çizgi grubu.',
+      ),
+      Command(
+        id: 'rh-ext',
+        name: 'EXTRUDE CURVE',
+        shortcut: 'ExtrudeCrv',
+        breadcrumb: 'Surface > Extrude',
+        description: 'Eğrileri katı veya yüzeye çevirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'archicad',
+    name: 'ArchiCAD',
+    brandColor: const Color(0xFF0066CC), // ArchiCAD blue
+    commands: [
+      Command(
+        id: 'ar-wall',
+        name: 'WALL',
+        shortcut: 'W',
+        breadcrumb: 'Design > Wall',
+        description: 'Duvar aracı.',
+      ),
+      Command(
+        id: 'ar-slab',
+        name: 'SLAB',
+        shortcut: 'S',
+        breadcrumb: 'Design > Slab',
+        description: 'Döşeme aracı.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'cinema4d',
+    name: 'Cinema 4D',
+    brandColor: const Color(0xFF0099E5), // Cinema 4D cyan
+    commands: [
+      Command(
+        id: 'c4d-move',
+        name: 'MOVE',
+        shortcut: 'E',
+        breadcrumb: 'Tools > Move',
+        description: 'Nesneleri taşır.',
+      ),
+      Command(
+        id: 'c4d-scale',
+        name: 'SCALE',
+        shortcut: 'T',
+        breadcrumb: 'Tools > Scale',
+        description: 'Nesneleri ölçeklendirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'maya',
+    name: 'Maya',
+    brandColor: const Color(0xFF48C5B9), // Maya turquoise
+    commands: [
+      Command(
+        id: 'my-move',
+        name: 'MOVE',
+        shortcut: 'W',
+        breadcrumb: 'Tools > Move',
+        description: 'Seçili objeyi taşır.',
+      ),
+      Command(
+        id: 'my-rotate',
+        name: 'ROTATE',
+        shortcut: 'E',
+        breadcrumb: 'Tools > Rotate',
+        description: 'Seçili objeyi döndürür.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'solidworks',
+    name: 'SolidWorks',
+    brandColor: const Color(0xFFC8102E), // SolidWorks red
+    commands: [
+      Command(
+        id: 'sw-sketch',
+        name: 'SKETCH',
+        shortcut: 'S',
+        breadcrumb: 'Features > Sketch',
+        description: 'Yeni bir çizim taslağı açar.',
+      ),
+      Command(
+        id: 'sw-extrude',
+        name: 'EXTRUDED BOSS',
+        shortcut: 'E',
+        breadcrumb: 'Features > Extrude',
+        description: 'Çizimi katıya çevirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'fusion360',
+    name: 'Fusion 360',
+    brandColor: const Color(0xFFFF6C00), // Fusion orange
+    commands: [
+      Command(
+        id: 'f3-ext',
+        name: 'EXTRUDE',
+        shortcut: 'E',
+        breadcrumb: 'Create > Extrude',
+        description: 'Profil yüzeylerini uzatarak katı oluşturur.',
+      ),
+      Command(
+        id: 'f3-fillet',
+        name: 'FILLET',
+        shortcut: 'F',
+        breadcrumb: 'Modify > Fillet',
+        description: 'Kenarları yuvarlatır.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'vectorworks',
+    name: 'Vectorworks',
+    brandColor: const Color(0xFF00A99D), // Vectorworks teal
+    commands: [
+      Command(
+        id: 'vw-line',
+        name: 'LINE',
+        shortcut: 'L',
+        breadcrumb: 'Toolbox > Line',
+        description: 'Düz çizgi çizer.',
+      ),
+      Command(
+        id: 'vw-rect',
+        name: 'RECTANGLE',
+        shortcut: '4',
+        breadcrumb: 'Toolbox > Rectangle',
+        description: 'Dikdörtgen aracı.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'photoshop',
+    name: 'Photoshop',
+    brandColor: const Color(0xFF31A8FF), // Adobe blue
+    commands: [
+      Command(
+        id: 'ps-brush',
+        name: 'BRUSH',
+        shortcut: 'B',
+        breadcrumb: 'Toolbar > Brush',
+        description: 'Fırça aracı.',
+      ),
+      Command(
+        id: 'ps-move',
+        name: 'MOVE',
+        shortcut: 'V',
+        breadcrumb: 'Toolbar > Move',
+        description: 'Taşıma aracı.',
+      ),
+      Command(
+        id: 'ps-crop',
+        name: 'CROP',
+        shortcut: 'C',
+        breadcrumb: 'Toolbar > Crop',
+        description: 'Kırpma aracı.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'illustrator',
+    name: 'Illustrator',
+    brandColor: const Color(0xFFFF9A00), // Adobe orange
+    commands: [
+      Command(
+        id: 'ai-pen',
+        name: 'PEN TOOL',
+        shortcut: 'P',
+        breadcrumb: 'Toolbar > Pen',
+        description: 'Vektörel çizim aracı.',
+      ),
+      Command(
+        id: 'ai-selection',
+        name: 'SELECTION',
+        shortcut: 'V',
+        breadcrumb: 'Toolbar > Selection',
+        description: 'Nesne seçme ve taşıma.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'zbrush',
+    name: 'ZBrush',
+    brandColor: const Color(0xFFFF6600), // ZBrush orange
+    commands: [
+      Command(
+        id: 'zb-brush',
+        name: 'BRUSH LIST',
+        shortcut: 'B',
+        breadcrumb: 'Standard > Brushes',
+        description: 'Fırça listesini açar.',
+      ),
+      Command(
+        id: 'zb-subtool',
+        name: 'SUBTOOL',
+        shortcut: 'N',
+        breadcrumb: 'Tool > Subtool',
+        description: 'Subtool menüsünü açar.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'lumion',
+    name: 'Lumion',
+    brandColor: const Color(0xFF00B140), // Lumion green
+    commands: [
+      Command(
+        id: 'lu-move',
+        name: 'MOVE',
+        shortcut: 'W/A/S/D',
+        breadcrumb: 'Navigation',
+        description: 'Sahne içerisinde hareket eder.',
+      ),
+      Command(
+        id: 'lu-place',
+        name: 'PLACE',
+        shortcut: 'P',
+        breadcrumb: 'Objects > Place',
+        description: 'Kütüphaneden obje yerleştirir.',
+      ),
+    ],
+  ),
+  Program(
+    id: 'indesign',
+    name: 'InDesign',
+    brandColor: const Color(0xFFFF3366), // Adobe pink
+    commands: [
+      Command(
+        id: 'id-text',
+        name: 'TEXT',
+        shortcut: 'T',
+        breadcrumb: 'Toolbar > Type',
+        description: 'Yazı alanı oluşturur.',
+      ),
+      Command(
+        id: 'id-rect',
+        name: 'RECTANGLE FRAME',
+        shortcut: 'F',
+        breadcrumb: 'Toolbar > Frame',
+        description: 'Görsel çerçevesi oluşturur.',
+      ),
+    ],
+  ),
 ];

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../models/program.dart';
 import '../theme/app_colors.dart';
 
@@ -95,41 +94,45 @@ class ProgramCard extends StatelessWidget {
 
                         const SizedBox(height: 8),
 
-                        // Program Logo
+                        // Program Logo - Premium First Letter Design
                         Container(
                           width: 56,
                           height: 56,
-                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? AppColors.darkBorder
-                                : const Color(0xFFF9FAFB),
+                            gradient: LinearGradient(
+                              colors: [
+                                program.brandColor.withOpacity(0.8),
+                                program.brandColor,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                             borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: program.brandColor.withOpacity(0.3),
+                                blurRadius: 8,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          child: program.imageUrl.endsWith('.svg')
-                              ? SvgPicture.asset(
-                                  program.imageUrl,
-                                  fit: BoxFit.contain,
-                                  placeholderBuilder: (context) => const Center(
-                                    child: SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
-                                    ),
+                          child: Center(
+                            child: Text(
+                              program.name[0].toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    offset: const Offset(0, 2),
+                                    blurRadius: 4,
                                   ),
-                                )
-                              : Image.asset(
-                                  program.imageUrl,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Icon(
-                                      Icons.apps,
-                                      color: theme.colorScheme.primary,
-                                    );
-                                  },
-                                ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
 
                         const SizedBox(height: 16),

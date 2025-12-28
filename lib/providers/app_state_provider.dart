@@ -6,13 +6,14 @@ import '../utils/storage_helper.dart';
 
 enum AppScreen { home, listing, saved }
 
+enum SearchFilter { name, shortcut }
+
 class AppStateProvider with ChangeNotifier {
   // Current State
   AppScreen _currentScreen = AppScreen.home;
   Program? _selectedProgram;
   Command? _selectedCommand;
   String? _selectedProgramName;
-  String? _selectedProgramLogo;
 
   // User Preferences
   List<String> _favoriteProgramIds = [];
@@ -24,13 +25,13 @@ class AppStateProvider with ChangeNotifier {
   // Search & Filter
   String _searchQuery = '';
   bool _isShortcutMode = false;
+  SearchFilter _searchFilter = SearchFilter.name;
 
   // Getters
   AppScreen get currentScreen => _currentScreen;
   Program? get selectedProgram => _selectedProgram;
   Command? get selectedCommand => _selectedCommand;
   String? get selectedProgramName => _selectedProgramName;
-  String? get selectedProgramLogo => _selectedProgramLogo;
   List<String> get favoriteProgramIds => _favoriteProgramIds;
   List<String> get favoriteCommandIds => _favoriteCommandIds;
   Map<String, String> get notes => _notes;
@@ -38,6 +39,7 @@ class AppStateProvider with ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
   String get searchQuery => _searchQuery;
   bool get isShortcutMode => _isShortcutMode;
+  SearchFilter get searchFilter => _searchFilter;
 
   List<Program> get allPrograms => programs;
 
@@ -50,11 +52,7 @@ class AppStateProvider with ChangeNotifier {
     for (var program in programs) {
       for (var command in program.commands) {
         if (_favoriteCommandIds.contains(command.id)) {
-          saved.add({
-            'command': command,
-            'programName': program.name,
-            'programLogo': program.imageUrl,
-          });
+          saved.add({'command': command, 'programName': program.name});
         }
       }
     }
@@ -84,21 +82,15 @@ class AppStateProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void selectCommand(
-    Command? command, {
-    String? programName,
-    String? programLogo,
-  }) {
+  void selectCommand(Command? command, {String? programName}) {
     _selectedCommand = command;
     if (command != null) {
       // If explicit program info is passed (e.g. from Saved screen), use it
-      if (programName != null) _selectedProgramName = programName;
-      if (programLogo != null)
-        _selectedProgramLogo = programLogo;
+      if (programName != null)
+        _selectedProgramName = programName;
       // If not, fall back to currently selected program (from Listing screen)
       else if (_selectedProgram != null) {
         _selectedProgramName = _selectedProgram!.name;
-        _selectedProgramLogo = _selectedProgram!.imageUrl;
       }
     }
     notifyListeners();
@@ -188,6 +180,11 @@ class AppStateProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setSearchFilter(SearchFilter filter) {
+    _searchFilter = filter;
+    notifyListeners();
+  }
+
   List<Command> getFilteredCommands() {
     if (_selectedProgram == null) return [];
 
@@ -197,8 +194,15 @@ class AppStateProvider with ChangeNotifier {
 
     return _selectedProgram!.commands.where((cmd) {
       final query = _searchQuery.toLowerCase();
-      return cmd.name.toLowerCase().contains(query) ||
-          cmd.shortcut.toLowerCase().contains(query);
+
+      if (_searchFilter == SearchFilter.name) {
+        // Search in name and description
+        return cmd.name.toLowerCase().contains(query) ||
+            cmd.description.toLowerCase().contains(query);
+      } else {
+        // Search only in shortcut
+        return cmd.shortcut.toLowerCase().contains(query);
+      }
     }).toList();
   }
 }

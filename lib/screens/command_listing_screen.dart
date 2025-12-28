@@ -194,6 +194,164 @@ class CommandListingScreen extends StatelessWidget {
                     .animate(delay: 200.ms)
                     .fadeIn(duration: 300.ms)
                     .slideY(begin: -0.2, end: 0),
+
+                const SizedBox(height: 12),
+
+                // Search Filter Toggle
+                Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? AppColors.darkCardBackground
+                            : const Color(0xFFF9FAFB),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: isDark
+                              ? AppColors.darkBorder
+                              : AppColors.lightBorder,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Name Filter Button
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () =>
+                                  appState.setSearchFilter(SearchFilter.name),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color:
+                                      appState.searchFilter == SearchFilter.name
+                                      ? (isDark
+                                            ? const Color(0xFF3B82F6)
+                                            : const Color(0xFF2563EB))
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.abc_rounded,
+                                      size: 18,
+                                      color:
+                                          appState.searchFilter ==
+                                              SearchFilter.name
+                                          ? Colors.white
+                                          : (isDark
+                                                ? AppColors.darkTextSecondary
+                                                : AppColors.lightTextSecondary),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      'Komut Adı',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color:
+                                                appState.searchFilter ==
+                                                    SearchFilter.name
+                                                ? Colors.white
+                                                : (isDark
+                                                      ? AppColors
+                                                            .darkTextSecondary
+                                                      : AppColors
+                                                            .lightTextSecondary),
+                                            fontWeight:
+                                                appState.searchFilter ==
+                                                    SearchFilter.name
+                                                ? FontWeight.w600
+                                                : FontWeight.w500,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(width: 4),
+
+                          // Shortcut Filter Button
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => appState.setSearchFilter(
+                                SearchFilter.shortcut,
+                              ),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color:
+                                      appState.searchFilter ==
+                                          SearchFilter.shortcut
+                                      ? (isDark
+                                            ? const Color(0xFF3B82F6)
+                                            : const Color(0xFF2563EB))
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.keyboard_rounded,
+                                      size: 18,
+                                      color:
+                                          appState.searchFilter ==
+                                              SearchFilter.shortcut
+                                          ? Colors.white
+                                          : (isDark
+                                                ? AppColors.darkTextSecondary
+                                                : AppColors.lightTextSecondary),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      'Kısayol',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color:
+                                                appState.searchFilter ==
+                                                    SearchFilter.shortcut
+                                                ? Colors.white
+                                                : (isDark
+                                                      ? AppColors
+                                                            .darkTextSecondary
+                                                      : AppColors
+                                                            .lightTextSecondary),
+                                            fontWeight:
+                                                appState.searchFilter ==
+                                                    SearchFilter.shortcut
+                                                ? FontWeight.w600
+                                                : FontWeight.w500,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                    .animate(delay: 250.ms)
+                    .fadeIn(duration: 300.ms)
+                    .slideY(begin: -0.2, end: 0),
               ],
             ),
           ),
@@ -237,7 +395,6 @@ class CommandListingScreen extends StatelessWidget {
                         onTap: () => appState.selectCommand(
                           command,
                           programName: program.name,
-                          programLogo: program.imageUrl,
                         ),
                         onFavoriteTap: () =>
                             appState.toggleFavoriteCommand(command.id),
