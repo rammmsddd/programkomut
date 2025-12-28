@@ -234,7 +234,9 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    widget.command.description,
+                    widget.command.getDescription(
+                      Localizations.localeOf(context).languageCode,
+                    ),
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: isDark
                           ? Colors.white.withOpacity(0.9)

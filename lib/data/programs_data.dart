@@ -27,6 +27,11 @@ final List<Program> programs = [
         shortcut: 'L',
         breadcrumb: 'Home > Draw > Line',
         description: 'Başlangıç ve bitiş noktası belli düz çizgi çizer.',
+        descriptionMap: {
+          'en': 'Draws a straight line with defined start and end points.',
+          'tr': 'Başlangıç ve bitiş noktası belli düz çizgi çizer.',
+          'es': 'Dibuja una línea recta con puntos de inicio y fin definidos.',
+        },
       ),
       Command(
         id: 'ac-pline',
