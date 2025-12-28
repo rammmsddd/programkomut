@@ -5,6 +5,7 @@ import '../providers/app_state_provider.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../models/command.dart';
+import '../widgets/command_icon.dart';
 
 class CommandListingScreen extends StatelessWidget {
   const CommandListingScreen({super.key});
@@ -390,6 +391,7 @@ class CommandListingScreen extends StatelessWidget {
                       final command = filteredCommands[index];
                       return _CommandListItem(
                         command: command,
+                        programName: program.name,
                         isShortcutMode: appState.isShortcutMode,
                         isFavorite: appState.isCommandFavorite(command.id),
                         onTap: () => appState.selectCommand(
@@ -413,6 +415,7 @@ class CommandListingScreen extends StatelessWidget {
 
 class _CommandListItem extends StatelessWidget {
   final Command command;
+  final String programName;
   final bool isShortcutMode;
   final bool isFavorite;
   final VoidCallback onTap;
@@ -423,6 +426,7 @@ class _CommandListItem extends StatelessWidget {
 
   const _CommandListItem({
     required this.command,
+    required this.programName,
     required this.isShortcutMode,
     required this.isFavorite,
     required this.onTap,
@@ -455,6 +459,14 @@ class _CommandListItem extends StatelessWidget {
         ),
         child: Row(
           children: [
+            // Command Icon
+            CommandIcon(
+              commandName: command.name,
+              programName: programName,
+              size: 40,
+              isDark: isDark,
+            ),
+            const SizedBox(width: 12),
             Expanded(
               child: Row(
                 children: isShortcutMode

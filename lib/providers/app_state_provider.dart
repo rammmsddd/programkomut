@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import '../models/program.dart';
 import '../models/command.dart';
+import '../models/collection.dart';
 import '../data/programs_data.dart';
 import '../utils/storage_helper.dart';
 
@@ -21,6 +23,7 @@ class AppStateProvider with ChangeNotifier {
   Map<String, String> _notes = {};
   String _languageCode = 'en';
   bool _isDarkMode = false;
+  List<Collection> _collections = [];
 
   // Search & Filter
   String _searchQuery = '';
@@ -40,6 +43,7 @@ class AppStateProvider with ChangeNotifier {
   String get searchQuery => _searchQuery;
   bool get isShortcutMode => _isShortcutMode;
   SearchFilter get searchFilter => _searchFilter;
+  List<Collection> get collections => _collections;
 
   List<Program> get allPrograms => programs;
 
@@ -66,6 +70,13 @@ class AppStateProvider with ChangeNotifier {
     _notes = await StorageHelper.getNotes();
     _languageCode = await StorageHelper.getLanguage();
     _isDarkMode = await StorageHelper.getDarkMode();
+
+    // Load collections
+    final collectionsJson = await StorageHelper.getCollections();
+    _collections = collectionsJson
+        .map((json) => Collection.fromJson(json))
+        .toList();
+
     notifyListeners();
   }
 
@@ -204,5 +215,147 @@ class AppStateProvider with ChangeNotifier {
         return cmd.shortcut.toLowerCase().contains(query);
       }
     }).toList();
+  }
+
+  // Collections Management
+  void createCollection(String name) {
+    final newCollection = Collection(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: name,
+      commandIds: [],
+      createdAt: DateTime.now(),
+    );
+    _collections.add(newCollection);
+    _saveCollections();
+    notifyListeners();
+  }
+
+  void deleteCollection(String collectionId) {
+    _collections.removeWhere((c) => c.id == collectionId);
+    _saveCollections();
+    notifyListeners();
+  }
+
+  void renameCollection(String collectionId, String newName) {
+    final index = _collections.indexWhere((c) => c.id == collectionId);
+    if (index != -1) {
+      _collections[index] = _collections[index].copyWith(name: newName);
+      _saveCollections();
+      notifyListeners();
+    }
+  }
+
+  void addCommandToCollection(String collectionId, String commandId) {
+    final index = _collections.indexWhere((c) => c.id == collectionId);
+    if (index != -1) {
+      final collection = _collections[index];
+      if (!collection.commandIds.contains(commandId)) {
+        final updatedIds = [...collection.commandIds, commandId];
+        _collections[index] = collection.copyWith(commandIds: updatedIds);
+        _saveCollections();
+        notifyListeners();
+      }
+    }
+  }
+
+  void removeCommandFromCollection(String collectionId, String commandId) {
+    final index = _collections.indexWhere((c) => c.id == collectionId);
+    if (index != -1) {
+      final collection = _collections[index];
+      final updatedIds = collection.commandIds
+          .where((id) => id != commandId)
+          .toList();
+      _collections[index] = collection.copyWith(commandIds: updatedIds);
+      _saveCollections();
+      notifyListeners();
+    }
+  }
+
+  bool isCommandInCollection(String collectionId, String commandId) {
+    final collection = _collections.firstWhere(
+      (c) => c.id == collectionId,
+      orElse: () => Collection(
+        id: '',
+        name: '',
+        commandIds: [],
+        createdAt: DateTime.now(),
+      ),
+    );
+    return collection.commandIds.contains(commandId);
+  }
+
+  List<Map<String, dynamic>> getCollectionCommands(String collectionId) {
+    final collection = _collections.firstWhere(
+      (c) => c.id == collectionId,
+      orElse: () => Collection(
+        id: '',
+        name: '',
+        commandIds: [],
+        createdAt: DateTime.now(),
+      ),
+    );
+
+    final commands = <Map<String, dynamic>>[];
+    for (final commandId in collection.commandIds) {
+      for (final program in programs) {
+        final command = program.commands.firstWhere(
+          (cmd) => cmd.id == commandId,
+          orElse: () => Command(
+            id: '',
+            name: '',
+            shortcut: '',
+            breadcrumb: '',
+            description: '',
+          ),
+        );
+        if (command.id.isNotEmpty) {
+          commands.add({'command': command, 'programName': program.name});
+          break;
+        }
+      }
+    }
+    return commands;
+  }
+
+  // Sharing: Export collection as JSON
+  String exportCollectionAsJson(String collectionId) {
+    final collection = _collections.firstWhere(
+      (c) => c.id == collectionId,
+      orElse: () => Collection(
+        id: '',
+        name: '',
+        commandIds: [],
+        createdAt: DateTime.now(),
+      ),
+    );
+
+    if (collection.id.isEmpty) return '';
+
+    return jsonEncode(collection.toJson());
+  }
+
+  // Sharing: Import collection from JSON
+  bool importCollectionFromJson(String jsonString) {
+    try {
+      final json = jsonDecode(jsonString) as Map<String, dynamic>;
+      final collection = Collection.fromJson(json);
+
+      // Regenerate ID to avoid conflicts
+      final importedCollection = collection.copyWith(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+      );
+
+      _collections.add(importedCollection);
+      _saveCollections();
+      notifyListeners();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> _saveCollections() async {
+    final collectionsJson = _collections.map((c) => c.toJson()).toList();
+    await StorageHelper.saveCollections(collectionsJson);
   }
 }

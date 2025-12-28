@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/app_state_provider.dart';
-import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import '../l10n/app_localizations.dart';
+import '../models/command.dart';
+import 'collections_screen.dart';
 import '../widgets/settings_modal.dart';
 
 class SavedCommandsScreen extends StatelessWidget {
@@ -93,6 +95,50 @@ class SavedCommandsScreen extends StatelessWidget {
                     .animate(delay: 150.ms)
                     .fadeIn(duration: 400.ms)
                     .rotate(begin: 0, end: 0, duration: 300.ms),
+                const SizedBox(width: 8),
+                // Collections Button
+                GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CollectionsScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              const Color(0xFF8B5CF6).withOpacity(0.8),
+                              const Color(0xFF6366F1),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF6366F1).withOpacity(0.3),
+                              blurRadius: 10,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.collections_bookmark,
+                          color: Colors.white,
+                          size: 22,
+                        ),
+                      ),
+                    )
+                    .animate(delay: 200.ms)
+                    .fadeIn(duration: 400.ms)
+                    .scale(
+                      begin: const Offset(0.8, 0.8),
+                      end: const Offset(1, 1),
+                    ),
               ],
             ),
           ),

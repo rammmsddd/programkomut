@@ -7,6 +7,7 @@ class StorageHelper {
   static const String _notesKey = 'notes';
   static const String _languageKey = 'lang';
   static const String _darkModeKey = 'darkMode';
+  static const String _collectionsKey = 'collections';
 
   // Get SharedPreferences instance
   static Future<SharedPreferences> get _prefs async {
@@ -72,5 +73,21 @@ class StorageHelper {
   static Future<void> saveDarkMode(bool isDark) async {
     final prefs = await _prefs;
     await prefs.setBool(_darkModeKey, isDark);
+  }
+
+  // Collections
+  static Future<List<Map<String, dynamic>>> getCollections() async {
+    final prefs = await _prefs;
+    final jsonString = prefs.getString(_collectionsKey);
+    if (jsonString == null) return [];
+    final List<dynamic> decoded = jsonDecode(jsonString);
+    return decoded.cast<Map<String, dynamic>>();
+  }
+
+  static Future<void> saveCollections(
+    List<Map<String, dynamic>> collections,
+  ) async {
+    final prefs = await _prefs;
+    await prefs.setString(_collectionsKey, jsonEncode(collections));
   }
 }

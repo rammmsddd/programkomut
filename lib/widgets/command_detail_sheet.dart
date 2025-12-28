@@ -6,6 +6,8 @@ import '../providers/app_state_provider.dart';
 import '../models/command.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
+import 'collection_picker_modal.dart';
+import 'command_icon.dart';
 
 class CommandDetailSheet extends StatefulWidget {
   final Command command;
@@ -169,6 +171,27 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 children: [
+                  // Command Icon
+                  Center(
+                    child:
+                        CommandIcon(
+                              commandName: widget.command.name,
+                              programName: programName,
+                              size: 72,
+                              isDark: isDark,
+                            )
+                            .animate()
+                            .fadeIn(duration: 600.ms)
+                            .scale(
+                              begin: const Offset(0.8, 0.8),
+                              end: const Offset(1.0, 1.0),
+                              curve: Curves.elasticOut,
+                              duration: 800.ms,
+                            ),
+                  ),
+
+                  const SizedBox(height: 24),
+
                   // Big Shortcut Letter
                   Center(
                     child:
@@ -311,57 +334,122 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
               ),
             ),
 
-            // Bottom Save Button
+            // Bottom Action Buttons
             Container(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-              child: GestureDetector(
-                onTap: () => appState.toggleFavoriteCommand(widget.command.id),
-                child: Container(
-                  width: double.infinity,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF1F2937)
-                        : const Color(0xFFF3F4F6),
-                    borderRadius: BorderRadius.circular(28),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                            isFavorite ? Icons.star : Icons.star_border_rounded,
-                            color: isFavorite
-                                ? AppColors.favoriteYellow
-                                : (isDark ? Colors.white : Colors.black87),
-                            size: 24,
-                          )
-                          .animate(target: isFavorite ? 1 : 0)
-                          .scale(
-                            begin: const Offset(1, 1),
-                            end: const Offset(1.3, 1.3),
-                            duration: 200.ms,
-                            curve: Curves.elasticOut,
-                          )
-                          .then()
-                          .scale(end: const Offset(1, 1)),
-                      const SizedBox(width: 8),
-                      Text(
-                        isFavorite
-                            ? t.translate('saved')
-                            : t.translate(
-                                'save',
-                              ), // Use localized "Save" / "Saved"
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+              child: Row(
+                children: [
+                  // Add to Collection Button
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (context) => CollectionPickerModal(
+                            commandId: widget.command.id,
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 56,
+                        decoration: BoxDecoration(
                           color: isDark
-                              ? Colors.white
-                              : const Color(0xFF374151),
+                              ? const Color(0xFF1F2937)
+                              : const Color(0xFFF3F4F6),
+                          borderRadius: BorderRadius.circular(28),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.collections_bookmark_outlined,
+                              color: isDark ? Colors.white70 : Colors.black87,
+                              size: 22,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Add to', // TODO: Localize
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: isDark
+                                    ? Colors.white70
+                                    : const Color(0xFF374151),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 12),
+                  // Favorite Button
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () =>
+                          appState.toggleFavoriteCommand(widget.command.id),
+                      child: Container(
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: isFavorite
+                              ? AppColors.favoriteYellow.withOpacity(0.1)
+                              : (isDark
+                                    ? const Color(0xFF1F2937)
+                                    : const Color(0xFFF3F4F6)),
+                          borderRadius: BorderRadius.circular(28),
+                          border: isFavorite
+                              ? Border.all(
+                                  color: AppColors.favoriteYellow,
+                                  width: 1.5,
+                                )
+                              : null,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                                  isFavorite
+                                      ? Icons.star
+                                      : Icons.star_border_rounded,
+                                  color: isFavorite
+                                      ? AppColors.favoriteYellow
+                                      : (isDark
+                                            ? Colors.white70
+                                            : Colors.black87),
+                                  size: 22,
+                                )
+                                .animate(target: isFavorite ? 1 : 0)
+                                .scale(
+                                  begin: const Offset(1, 1),
+                                  end: const Offset(1.3, 1.3),
+                                  duration: 200.ms,
+                                  curve: Curves.elasticOut,
+                                )
+                                .then()
+                                .scale(end: const Offset(1, 1)),
+                            const SizedBox(width: 8),
+                            Text(
+                              isFavorite
+                                  ? t.translate('saved')
+                                  : t.translate('save'),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: isFavorite
+                                    ? AppColors.favoriteYellow
+                                    : (isDark
+                                          ? Colors.white70
+                                          : const Color(0xFF374151)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

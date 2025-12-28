@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'Command Finder',
+      title: 'LineLibrary',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
