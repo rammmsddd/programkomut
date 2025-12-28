@@ -196,9 +196,9 @@ class AppStateProvider with ChangeNotifier {
       final query = _searchQuery.toLowerCase();
 
       if (_searchFilter == SearchFilter.name) {
-        // Search in name and description
-        return cmd.name.toLowerCase().contains(query) ||
-            cmd.description.toLowerCase().contains(query);
+        // Search in name and description (checking localized first)
+        final desc = cmd.getDescription(_languageCode).toLowerCase();
+        return cmd.name.toLowerCase().contains(query) || desc.contains(query);
       } else {
         // Search only in shortcut
         return cmd.shortcut.toLowerCase().contains(query);

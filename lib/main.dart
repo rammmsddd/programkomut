@@ -10,6 +10,7 @@ import 'widgets/command_detail_sheet.dart';
 import 'theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
 import 'models/command.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,15 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      locale: Locale(appState.languageCode),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLanguages
+          .map((lang) => Locale(lang.code))
+          .toList(),
       home: const _CommandDetailObserver(child: MainScreen()),
     );
   }

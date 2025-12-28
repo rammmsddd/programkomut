@@ -253,7 +253,7 @@ class CommandListingScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      'Komut Adı',
+                                      t.translate('nameMode'),
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
@@ -320,7 +320,7 @@ class CommandListingScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 6),
                                     Text(
-                                      'Kısayol',
+                                      t.translate('shortcutMode'),
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodySmall
