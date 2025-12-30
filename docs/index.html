@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LineLibrary - Gizlilik Politikası / Privacy Policy</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, sans-serif;
+        line-height: 1.6;
+        color: #1a1a2e;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
+        padding: 48px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      .logo {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .logo h1 {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .logo p {
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-top: 8px;
+      }
+      .lang-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 32px;
+        justify-content: center;
+      }
+      .lang-tab {
+        padding: 10px 24px;
+        border: none;
+        background: #f1f5f9;
+        color: #475569;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .lang-tab.active {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+      }
+      .lang-tab:hover:not(.active) {
+        background: #e2e8f0;
+      }
+      .content {
+        display: none;
+      }
+      .content.active {
+        display: block;
+      }
+      h2 {
+        font-size: 1.5rem;
+        color: #1e293b;
+        margin: 32px 0 16px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      h3 {
+        font-size: 1.1rem;
+        color: #334155;
+        margin: 24px 0 12px 0;
+      }
+      p {
+        color: #475569;
+        margin-bottom: 12px;
+      }
+      ul {
+        list-style: none;
+        margin: 16px 0;
+      }
+      li {
+        padding: 8px 0;
+        color: #475569;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .check {
+        color: #10b981;
+        font-weight: bold;
+      }
+      .cross {
+        color: #ef4444;
+        font-weight: bold;
+      }
+      .highlight {
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        border-left: 4px solid #6366f1;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      .contact {
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 32px;
+      }
+      .contact a {
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .contact a:hover {
+        text-decoration: underline;
+      }
+      .developer {
+        font-weight: 600;
+        color: #1e293b;
+      }
+      .update-date {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 0.85rem;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1>LineLibrary</h1>
+        <p>Command Reference Application</p>
+      </div>
+
+      <div class="lang-tabs">
+        <button class="lang-tab active" onclick="showLang('tr')">
+          🇹🇷 Türkçe
+        </button>
+        <button class="lang-tab" onclick="showLang('en')">🇬🇧 English</button>
+      </div>
+
+      <!-- Turkish Content -->
+      <div id="tr" class="content active">
+        <h2>Gizlilik Politikası</h2>
+
+        <h3>Uygulama Hakkında</h3>
+        <p>
+          LineLibrary, yazılım programları için komut ve kısayol referansı sunan
+          bir mobil uygulamadır.
+        </p>
+        <p><span class="developer">Geliştirici:</span> Ramazan Sarı</p>
+        <p><span class="developer">İletişim:</span> ramoosari@icloud.com</p>
+
+        <h3>Veri Toplama</h3>
+        <div class="highlight">
+          <strong
+            >LineLibrary, kullanıcılarından hiçbir kişisel veri
+            toplamaz.</strong
+          >
+        </div>
+        <ul>
+          <li><span class="cross">❌</span> Kişisel bilgi toplamıyoruz</li>
+          <li><span class="cross">❌</span> Konum verisi toplamıyoruz</li>
+          <li><span class="cross">❌</span> Kullanım analitiği toplamıyoruz</li>
+          <li>
+            <span class="cross">❌</span> Cihaz tanımlayıcıları toplamıyoruz
+          </li>
+          <li>
+            <span class="cross">❌</span> Üçüncü taraflarla veri paylaşmıyoruz
+          </li>
+        </ul>
+
+        <h3>Yerel Depolama</h3>
+        <p>
+          Uygulama, aşağıdaki bilgileri
+          <strong>yalnızca cihazınızda</strong> saklar:
+        </p>
+        <ul>
+          <li><span class="check">✓</span> Favori programlarınız</li>
+          <li><span class="check">✓</span> Favori komutlarınız</li>
+          <li><span class="check">✓</span> Kişisel notlarınız</li>
+          <li><span class="check">✓</span> Dil ve tema tercihleriniz</li>
+          <li><span class="check">✓</span> Oluşturduğunuz koleksiyonlar</li>
+        </ul>
+        <p>
+          Bu veriler <strong>asla</strong> sunuculara gönderilmez veya üçüncü
+          taraflarla paylaşılmaz.
+        </p>
+
+        <h3>İnternet Erişimi</h3>
+        <p>
+          LineLibrary <strong>internet bağlantısı gerektirmez</strong> ve
+          herhangi bir ağ isteği yapmaz.
+        </p>
+
+        <h3>Çocukların Gizliliği</h3>
+        <p>Uygulama 13 yaşın altındaki çocuklardan bilerek veri toplamaz.</p>
+
+        <h3>Değişiklikler</h3>
+        <p>Bu politikada yapılacak değişiklikler bu sayfada yayınlanacaktır.</p>
+
+        <div class="contact">
+          <p>
+            Sorularınız için:
+            <a href="mailto:ramoosari@icloud.com">ramoosari@icloud.com</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- English Content -->
+      <div id="en" class="content">
+        <h2>Privacy Policy</h2>
+
+        <h3>About the App</h3>
+        <p>
+          LineLibrary is a mobile application that provides command and shortcut
+          references for software programs.
+        </p>
+        <p><span class="developer">Developer:</span> Ramazan Sarı</p>
+        <p><span class="developer">Contact:</span> ramoosari@icloud.com</p>
+
+        <h3>Data Collection</h3>
+        <div class="highlight">
+          <strong
+            >LineLibrary does not collect any personal data from its
+            users.</strong
+          >
+        </div>
+        <ul>
+          <li>
+            <span class="cross">❌</span> We do not collect personal information
+          </li>
+          <li><span class="cross">❌</span> We do not collect location data</li>
+          <li>
+            <span class="cross">❌</span> We do not collect usage analytics
+          </li>
+          <li>
+            <span class="cross">❌</span> We do not collect device identifiers
+          </li>
+          <li>
+            <span class="cross">❌</span> We do not share data with third
+            parties
+          </li>
+        </ul>
+
+        <h3>Local Storage</h3>
+        <p>
+          The app stores the following information
+          <strong>only on your device</strong>:
+        </p>
+        <ul>
+          <li><span class="check">✓</span> Your favorite programs</li>
+          <li><span class="check">✓</span> Your favorite commands</li>
+          <li><span class="check">✓</span> Your personal notes</li>
+          <li>
+            <span class="check">✓</span> Your language and theme preferences
+          </li>
+          <li><span class="check">✓</span> Collections you create</li>
+        </ul>
+        <p>
+          This data is <strong>never</strong> sent to servers or shared with
+          third parties.
+        </p>
+
+        <h3>Internet Access</h3>
+        <p>
+          LineLibrary <strong>does not require internet connection</strong> and
+          does not make any network requests.
+        </p>
+
+        <h3>Children's Privacy</h3>
+        <p>
+          The app does not knowingly collect data from children under 13 years
+          of age.
+        </p>
+
+        <h3>Changes</h3>
+        <p>Changes to this policy will be published on this page.</p>
+
+        <div class="contact">
+          <p>
+            For questions:
+            <a href="mailto:ramoosari@icloud.com">ramoosari@icloud.com</a>
+          </p>
+        </div>
+      </div>
+
+      <p class="update-date">Son Güncelleme / Last Updated: 30 Aralık 2024</p>
+    </div>
+
+    <script>
+      function showLang(lang) {
+        document
+          .querySelectorAll(".content")
+          .forEach((el) => el.classList.remove("active"));
+        document
+          .querySelectorAll(".lang-tab")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(lang).classList.add("active");
+        event.target.classList.add("active");
+      }
+    </script>
+  </body>
+</html>
