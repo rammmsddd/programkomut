@@ -19,6 +19,10 @@ workflows:
         APP_STORE_APP_ID: "YOUR_APP_ID" # Update after creating app in App Store Connect
 
     scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+
       - name: Set up code signing
         script: |
           keychain initialize
@@ -26,13 +30,10 @@ workflows:
           keychain add-certificates
           xcode-project use-profiles
 
-      - name: Get Flutter packages
-        script: |
-          flutter packages pub get
-
       - name: Install CocoaPods
         script: |
-          cd ios && pod install
+          cd ios
+          pod install --repo-update
 
       - name: Flutter build iOS
         script: |
