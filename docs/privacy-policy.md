@@ -8,8 +8,9 @@
 
 LineLibrary, yazılım programları için komut ve kısayol referansı sunan bir mobil uygulamadır.
 
-**Geliştirici:** Ramazan Sarı  
-**İletişim:** ramoosari@icloud.com
+**Geliştirici:** SupportAiCoder  
+**İletişim (iOS):** ramoosari@icloud.com  
+**İletişim (Android):** ramcosari3@gmail.com
 
 ### Veri Toplama
 
@@ -47,7 +48,8 @@ Bu politikada yapılacak değişiklikler bu sayfada yayınlanacaktır.
 
 ### İletişim
 
-Sorularınız için: ramoosari@icloud.com
+- **iOS:** ramoosari@icloud.com
+- **Android:** ramcosari3@gmail.com
 
 ---
 
@@ -57,8 +59,9 @@ Sorularınız için: ramoosari@icloud.com
 
 LineLibrary is a mobile application that provides command and shortcut references for software programs.
 
-**Developer:** Ramazan Sarı  
-**Contact:** ramoosari@icloud.com
+**Developer:** SupportAiCoder  
+**Contact (iOS):** ramoosari@icloud.com  
+**Contact (Android):** ramcosari3@gmail.com
 
 ### Data Collection
 
@@ -96,4 +99,5 @@ Changes to this policy will be published on this page.
 
 ### Contact
 
-For questions: ramoosari@icloud.com
+- **iOS:** ramoosari@icloud.com
+- **Android:** ramcosari3@gmail.com
