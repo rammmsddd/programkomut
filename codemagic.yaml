@@ -28,7 +28,6 @@ workflows:
           keychain initialize
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           keychain add-certificates
-          xcode-project use-profiles
 
       - name: Install CocoaPods
         script: |
@@ -41,10 +40,11 @@ workflows:
 
       - name: Build and sign IPA
         script: |
+          xcode-project use-profiles
           xcode-project build-ipa \
             --workspace ios/Runner.xcworkspace \
             --scheme Runner \
-            --archive-flags="-destination 'generic/platform=iOS'"
+            --config Release
 
     artifacts:
       - build/ios/ipa/*.ipa
