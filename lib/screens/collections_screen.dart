@@ -29,12 +29,12 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Create Collection'), // TODO: Localize
+        title: Text(t.translate('createCollection')),
         content: TextField(
           controller: _createController,
           autofocus: true,
           decoration: InputDecoration(
-            hintText: 'Collection name...', // TODO: Localize
+            hintText: t.translate('collectionName'),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
@@ -60,16 +60,16 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
 
   void _deleteCollection(String collectionId) {
     final appState = context.read<AppStateProvider>();
-
+    final t = AppLocalizations(appState.languageCode);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Collection?'), // TODO: Localize
-        content: Text('This action cannot be undone.'), // TODO: Localize
+        title: Text(t.translate('deleteCollection')),
+        content: Text(t.translate('deleteConfirm')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'), // TODO: Localize
+            child: Text(t.translate('cancel')),
           ),
           FilledButton(
             onPressed: () {
@@ -77,7 +77,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
               Navigator.pop(context);
             },
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            child: Text('Delete'), // TODO: Localize
+            child: Text(t.translate('delete')),
           ),
         ],
       ),
@@ -87,6 +87,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppStateProvider>();
+    final t = AppLocalizations(appState.languageCode);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isRTL = AppLocalizations.supportedLanguages
         .firstWhere((l) => l.code == appState.languageCode)
@@ -101,7 +102,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
             ? AppColors.darkBackground
             : AppColors.lightBackground,
         appBar: AppBar(
-          title: Text('Collections'), // TODO: Localize
+          title: Text(t.translate('collections')),
           centerTitle: true,
           elevation: 0,
           backgroundColor: isDark
@@ -131,7 +132,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                         ),
                     const SizedBox(height: 24),
                     Text(
-                      'No Collections Yet', // TODO: Localize
+                      t.translate('noCollections'),
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: isDark
                             ? AppColors.darkTextPrimary
@@ -140,7 +141,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Create your first collection below', // TODO: Localize
+                      t.translate('createFirst'),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -260,7 +261,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            '$commandCount command${commandCount != 1 ? 's' : ''}', // TODO: Localize
+                                            '$commandCount ${t.translate('commands')}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               color: isDark
@@ -300,7 +301,7 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
           onPressed: _showCreateDialog,
           backgroundColor: AppColors.accentBlue,
           icon: const Icon(Icons.add),
-          label: Text('New Collection'), // TODO: Localize
+          label: Text(t.translate('createNew')),
         ),
       ),
     );

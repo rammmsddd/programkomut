@@ -63,7 +63,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Add to Collection', // TODO: Localize
+                  t.translate('addToCollection'),
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -83,7 +83,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
             Padding(
               padding: const EdgeInsets.all(24),
               child: Text(
-                'No collections yet. Create one below!', // TODO: Localize
+                t.translate('createFirst'),
                 style: TextStyle(
                   color: isDark
                       ? AppColors.darkTextSecondary
@@ -163,7 +163,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
                                 ),
                                 if (isInCollection)
                                   Text(
-                                    'Already in this collection', // TODO: Localize
+                                    t.translate('added'),
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.green.shade700,
@@ -191,7 +191,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
                 const Divider(),
                 const SizedBox(height: 16),
                 Text(
-                  'Or create new:', // TODO: Localize
+                  t.translate('createNew'),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -204,7 +204,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
                 TextField(
                   controller: _newCollectionController,
                   decoration: InputDecoration(
-                    hintText: 'New collection name...', // TODO: Localize
+                    hintText: t.translate('collectionName'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -265,9 +265,7 @@ class _CollectionPickerModalState extends State<CollectionPickerModal> {
                       // Show confirmation
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Added to collection',
-                          ), // TODO: Localize
+                          content: Text(t.translate('added')),
                           behavior: SnackBarBehavior.floating,
                         ),
                       );

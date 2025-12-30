@@ -10,9 +10,6 @@ import 'programs/cinema4d_commands.dart';
 import 'programs/rhino_commands.dart';
 import 'programs/remaining_programs.dart';
 
-// AutoCAD will be imported from the old file temporarily
-// TODO: Extract AutoCAD commands to separate file
-
 final List<Program> programs = [
   // Keep existing AutoCAD with all commands (from old file)
   // This will be extracted later

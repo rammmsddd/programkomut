@@ -14,6 +14,7 @@ class CollectionDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppStateProvider>();
+    final t = AppLocalizations(appState.languageCode);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isRTL = AppLocalizations.supportedLanguages
         .firstWhere((l) => l.code == appState.languageCode)
@@ -31,10 +32,8 @@ class CollectionDetailScreen extends StatelessWidget {
 
     if (collection.id.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: Text('Collection Not Found')), // TODO: Localize
-        body: Center(
-          child: Text('This collection no longer exists'),
-        ), // TODO: Localize
+        appBar: AppBar(title: Text(t.translate('collectionNotFound'))),
+        body: Center(child: Text(t.translate('collectionNotExist'))),
       );
     }
 
@@ -54,14 +53,13 @@ class CollectionDetailScreen extends StatelessWidget {
               ? AppColors.darkBackground
               : AppColors.lightBackground,
           actions: [
-            // Share button (TODO: implement sharing)
+            // Share button
             IconButton(
               icon: const Icon(Icons.share_rounded),
               onPressed: () {
-                // TODO: Show share dialog
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Sharing coming soon!'), // TODO: Localize
+                    content: Text(t.translate('comingSoon')),
                     behavior: SnackBarBehavior.floating,
                   ),
                 );
@@ -92,7 +90,7 @@ class CollectionDetailScreen extends StatelessWidget {
                         ),
                     const SizedBox(height: 24),
                     Text(
-                      'Empty Collection', // TODO: Localize
+                      t.translate('emptyCollection'),
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: isDark
                             ? AppColors.darkTextPrimary
@@ -101,7 +99,7 @@ class CollectionDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Add commands from detail sheets', // TODO: Localize
+                      t.translate('addFromDetails'),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -137,9 +135,7 @@ class CollectionDetailScreen extends StatelessWidget {
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Removed from collection',
-                          ), // TODO: Localize
+                          content: Text(t.translate('removedFromCollection')),
                           behavior: SnackBarBehavior.floating,
                         ),
                       );

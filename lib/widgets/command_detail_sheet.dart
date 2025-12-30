@@ -370,7 +370,7 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Add to', // TODO: Localize
+                              t.translate('addTo'),
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
