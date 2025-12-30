@@ -48,7 +48,10 @@ workflows:
 
     publishing:
       app_store_connect:
-        auth: integration
+        # API Key authentication - set these in Environment variables
+        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
+        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
+        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
         submit_to_testflight: true
         # submit_to_app_store: true  # Uncomment for production release
 
