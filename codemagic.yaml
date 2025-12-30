@@ -28,10 +28,17 @@ workflows:
         script: |
           flutter pub get
 
+      - name: Create certificate key file
+        script: |
+          echo "$CERTIFICATE_PRIVATE_KEY" > $CM_BUILD_DIR/cert_key.pem
+
       - name: Set up code signing
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create --certificate-key=@env:APP_STORE_CONNECT_PRIVATE_KEY
+          app-store-connect fetch-signing-files "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create \
+            --certificate-key=@file:$CM_BUILD_DIR/cert_key.pem
           keychain add-certificates
 
       - name: Install CocoaPods
