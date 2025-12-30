@@ -56,7 +56,11 @@ class AppStateProvider with ChangeNotifier {
     for (var program in programs) {
       for (var command in program.commands) {
         if (_favoriteCommandIds.contains(command.id)) {
-          saved.add({'command': command, 'programName': program.name});
+          saved.add({
+            'command': command,
+            'programName': program.name,
+            'program': program, // Added program object for color access
+          });
         }
       }
     }

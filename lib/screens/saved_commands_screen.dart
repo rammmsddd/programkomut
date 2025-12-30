@@ -192,6 +192,7 @@ class SavedCommandsScreen extends StatelessWidget {
                       final item = savedCommands[index];
                       final command = item['command'];
                       final programName = item['programName'];
+                      final program = item['program'];
 
                       return GestureDetector(
                         onTap: () => appState.selectCommand(
@@ -231,10 +232,10 @@ class SavedCommandsScreen extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              const Color(
-                                                0xFF6366F1,
-                                              ).withValues(alpha: 0.8),
-                                              const Color(0xFF6366F1),
+                                              program.brandColor.withValues(
+                                                alpha: 0.8,
+                                              ),
+                                              program.brandColor,
                                             ],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
@@ -244,9 +245,8 @@ class SavedCommandsScreen extends StatelessWidget {
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color(
-                                                0xFF6366F1,
-                                              ).withValues(alpha: 0.3),
+                                              color: program.brandColor
+                                                  .withValues(alpha: 0.3),
                                               blurRadius: 6,
                                               offset: const Offset(0, 2),
                                             ),
@@ -276,7 +276,7 @@ class SavedCommandsScreen extends StatelessWidget {
                                               style: TextStyle(
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.w900,
-                                                color: AppColors.accentBlue,
+                                                color: program.brandColor,
                                                 letterSpacing: 1.5,
                                               ),
                                             ),

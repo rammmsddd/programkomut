@@ -186,22 +186,21 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                 margin: const EdgeInsets.only(bottom: 14),
                                 padding: const EdgeInsets.all(20),
                                 decoration: BoxDecoration(
-                                  color: isDark
-                                      ? AppColors.darkCardBackground
-                                      : Colors.white,
+                                  gradient: index % 2 == 0
+                                      ? AppGradients.collectionBlue
+                                      : AppGradients.collectionPurple,
                                   borderRadius: BorderRadius.circular(28),
-                                  border: Border.all(
-                                    color: isDark
-                                        ? AppColors.darkBorder
-                                        : AppColors.lightBorder,
-                                  ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(
-                                        alpha: 0.03,
-                                      ),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 2),
+                                      color:
+                                          (index % 2 == 0
+                                                  ? AppColors
+                                                        .collectionBlueStart
+                                                  : AppColors
+                                                        .collectionPurpleStart)
+                                              .withValues(alpha: 0.3),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4),
                                     ),
                                   ],
                                 ),
@@ -212,25 +211,10 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                       width: 48,
                                       height: 48,
                                       decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            AppColors.accentBlue.withValues(
-                                              alpha: 0.8,
-                                            ),
-                                            AppColors.accentBlue,
-                                          ],
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
                                         ),
                                         borderRadius: BorderRadius.circular(16),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: AppColors.accentBlue
-                                                .withValues(alpha: 0.3),
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
                                       ),
                                       child: const Center(
                                         child: Icon(
@@ -250,12 +234,11 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                         children: [
                                           Text(
                                             collection.name,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium
-                                                ?.copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                            style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -264,22 +247,46 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                             '$commandCount ${t.translate('commands')}',
                                             style: TextStyle(
                                               fontSize: 13,
-                                              color: isDark
-                                                  ? AppColors.darkTextSecondary
-                                                  : AppColors
-                                                        .lightTextSecondary,
+                                              color: Colors.white.withValues(
+                                                alpha: 0.9,
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    Icon(
-                                      isRTL
-                                          ? Icons.chevron_left_rounded
-                                          : Icons.chevron_right_rounded,
-                                      color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.lightTextSecondary,
+                                    PopupMenuButton<String>(
+                                      icon: const Icon(
+                                        Icons.more_vert_rounded,
+                                        color: Colors.white,
+                                      ),
+                                      onSelected: (value) {
+                                        if (value == 'delete') {
+                                          _deleteCollection(collection.id);
+                                        }
+                                      },
+                                      itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          value: 'delete',
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.delete_outline_rounded,
+                                                color: Colors.red,
+                                                size: 20,
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                t.translate('delete'),
+                                                style: const TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),

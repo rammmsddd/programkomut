@@ -58,10 +58,12 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                               t.translate('title'),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w900,
-                                color: Colors.white,
+                                color: isDark
+                                    ? Colors.white
+                                    : AppColors.lightTextPrimary,
                                 letterSpacing: -0.5,
                               ),
                             )
@@ -77,7 +79,9 @@ class HomeScreen extends StatelessWidget {
                               t.translate('subtitle'),
                               style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.white.withValues(alpha: 0.9),
+                                color: isDark
+                                    ? Colors.white.withValues(alpha: 0.9)
+                                    : AppColors.lightTextSecondary,
                                 height: 1.4,
                               ),
                               maxLines: 2,
@@ -94,7 +98,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Icon(
                         Icons.language_rounded,
-                        color: Colors.white.withValues(alpha: 0.3),
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.3)
+                            : AppColors.lightTextPrimary.withValues(alpha: 0.3),
                         size: 40,
                       )
                       .animate(
@@ -124,24 +130,45 @@ class HomeScreen extends StatelessWidget {
                     Container(
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                const Color(0xFF8B5CF6).withValues(alpha: 0.8),
-                                const Color(0xFF6366F1),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
+                            color: isDark ? null : AppColors.collectionsCard,
+                            gradient: isDark
+                                ? LinearGradient(
+                                    colors: [
+                                      const Color(
+                                        0xFF8B5CF6,
+                                      ).withValues(alpha: 0.8),
+                                      const Color(0xFF6366F1),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  )
+                                : null,
                             borderRadius: BorderRadius.circular(24),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(
-                                  0xFF6366F1,
-                                ).withValues(alpha: 0.3),
-                                blurRadius: 12,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
+                            border: isDark
+                                ? null
+                                : Border.all(
+                                    color: AppColors.lightBorder,
+                                    width: 1,
+                                  ),
+                            boxShadow: isDark
+                                ? [
+                                    BoxShadow(
+                                      color: const Color(
+                                        0xFF6366F1,
+                                      ).withValues(alpha: 0.3),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ]
+                                : [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.05,
+                                      ),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                           ),
                           child: Row(
                             children: [
@@ -149,12 +176,18 @@ class HomeScreen extends StatelessWidget {
                                 width: 48,
                                 height: 48,
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withValues(alpha: 0.2),
+                                  color: isDark
+                                      ? Colors.white.withValues(alpha: 0.2)
+                                      : AppColors.accentBlue.withValues(
+                                          alpha: 0.15,
+                                        ),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
-                                child: const Icon(
+                                child: Icon(
                                   Icons.collections_bookmark,
-                                  color: Colors.white,
+                                  color: isDark
+                                      ? Colors.white
+                                      : AppColors.accentBlue,
                                   size: 26,
                                 ),
                               ),
@@ -165,10 +198,12 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       t.translate('myCollections'),
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: isDark
+                                            ? Colors.white
+                                            : AppColors.lightTextPrimary,
                                       ),
                                     ),
                                     const SizedBox(height: 2),
@@ -176,9 +211,11 @@ class HomeScreen extends StatelessWidget {
                                       '${appState.collections.length} ${t.translate('collections').toLowerCase()}',
                                       style: TextStyle(
                                         fontSize: 13,
-                                        color: Colors.white.withValues(
-                                          alpha: 0.9,
-                                        ),
+                                        color: isDark
+                                            ? Colors.white.withValues(
+                                                alpha: 0.9,
+                                              )
+                                            : AppColors.lightTextSecondary,
                                       ),
                                     ),
                                   ],
@@ -188,7 +225,9 @@ class HomeScreen extends StatelessWidget {
                                 isRTL
                                     ? Icons.chevron_left_rounded
                                     : Icons.chevron_right_rounded,
-                                color: Colors.white,
+                                color: isDark
+                                    ? Colors.white
+                                    : AppColors.lightTextSecondary,
                                 size: 28,
                               ),
                             ],

@@ -40,55 +40,67 @@ class SettingsModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Handle
+            // Blue Header Section
             Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 20),
-              width: 48,
-              height: 5,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkBorder : const Color(0xFFE5E7EB),
-                borderRadius: BorderRadius.circular(10),
+                gradient: AppGradients.blueHeader,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(48),
+                  topRight: Radius.circular(48),
+                ),
               ),
-            ).animate().fadeIn(duration: 200.ms),
-
-            // Header
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.fromLTRB(32, 12, 32, 20),
+              child: Column(
                 children: [
-                  Text(
-                        t.translate('settings'),
-                        style: Theme.of(context).textTheme.displayMedium,
-                      )
-                      .animate()
-                      .fadeIn(duration: 300.ms)
-                      .slideX(begin: isRTL ? 0.2 : -0.2, end: 0),
-                  GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? AppColors.darkBorder
-                                : const Color(0xFFF9FAFB),
-                            borderRadius: BorderRadius.circular(16),
+                  // Handle
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    width: 48,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ).animate().fadeIn(duration: 200.ms),
+
+                  // Header Row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                            t.translate('settings'),
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          )
+                          .animate()
+                          .fadeIn(duration: 300.ms)
+                          .slideX(begin: isRTL ? 0.2 : -0.2, end: 0),
+                      GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(
+                                Icons.close_rounded,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          )
+                          .animate(delay: 100.ms)
+                          .fadeIn(duration: 300.ms)
+                          .scale(
+                            begin: const Offset(0.5, 0.5),
+                            end: const Offset(1.0, 1.0),
                           ),
-                          child: Icon(
-                            Icons.close_rounded,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
-                            size: 20,
-                          ),
-                        ),
-                      )
-                      .animate(delay: 100.ms)
-                      .fadeIn(duration: 300.ms)
-                      .scale(
-                        begin: const Offset(0.5, 0.5),
-                        end: const Offset(1.0, 1.0),
-                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -127,7 +139,9 @@ class SettingsModal extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.05),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.05,
+                                      ),
                                       blurRadius: 4,
                                     ),
                                   ],
@@ -221,8 +235,9 @@ class SettingsModal extends StatelessWidget {
                                         ? (isDark
                                               ? AppColors.accentBlueDark
                                                     .withValues(alpha: 0.2)
-                                              : AppColors.accentBlue
-                                                    .withValues(alpha: 0.1))
+                                              : AppColors.accentBlue.withValues(
+                                                  alpha: 0.1,
+                                                ))
                                         : (isDark
                                               ? const Color(0xFF374151)
                                               : const Color(0xFFF9FAFB)),

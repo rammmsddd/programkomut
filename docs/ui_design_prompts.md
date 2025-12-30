@@ -1,408 +1,299 @@
-# LineLibrary - UI Design Prompts
+# LineLibrary - UI Wireframe Prompts
 
-**App Name:** LineLibrary  
-**App Type:** Yazılım Komutları Referans Uygulaması  
-**Platforms:** iOS, Android  
-**Languages:** Türkçe, İngilizce, Arapça (RTL desteği)
+**Ekran boyutu:** 390x844px (iPhone 14)
 
 ---
 
-## 🎨 GENEL TASARIM YÖNERGELERİ
-
-**Stil:** Modern, minimal, premium  
-**Tema:** Dark mode + Light mode desteği  
-**Renk paleti:**
-
-- Primary: #6366F1 (Indigo/Mor)
-- Accent: #2563EB (Mavi)
-- Favorite: Sarı (yıldız ikonu için)
-- Dark Background: #0F172A
-- Light Background: #FFFFFF
-
-**Font:** Inter veya sistem fontu  
-**Köşeler:** Yuvarlak (16-32px radius)  
-**Animasyonlar:** Yumuşak geçişler, slide-in efektleri
-
----
-
-## 📱 EKRAN 1: ANA SAYFA (Home Screen)
-
-### Prompt:
+## 📱 EKRAN 1: ANA SAYFA
 
 ```
-Design a premium mobile app home screen for a software command reference app called "LineLibrary".
+Mobile app screen: 390x844px, dark mode (#0F172A background)
 
-HEADER SECTION:
-- Gradient header (dark purple to indigo) with rounded bottom corners (40px radius)
-- App title "LineLibrary" in bold white text (28px)
-- Subtitle: "Find commands and shortcuts instantly" in semi-transparent white
-- Floating globe icon on the right side with subtle rotation animation
+ELEMENT POSITIONS:
 
-MY COLLECTIONS CARD:
-- Horizontal card with purple gradient background
-- Left: Bookmark icon in semi-transparent white circle
-- Title: "My Collections"
-- Subtitle: "3 collections"
-- Right arrow icon
-- Drop shadow with purple tint
+┌─────────────────────────────────────┐ y=0
+│         STATUS BAR (44px)           │
+├─────────────────────────────────────┤ y=44
+│                                     │
+│  ┌─────────────────────────────┐    │ y=44, x=0, w=390, h=104
+│  │ HEADER (gradient purple)    │    │
+│  │                             │    │
+│  │ x=24: "Komut Bulucu"        │    │ y=60, 28px white bold
+│  │ x=24: "İhtiyacın olan..."   │    │ y=96, 13px white 90%
+│  │                    🌐 x=342 │    │ y=72, 40px icon
+│  │                             │    │
+│  └─────────────────────────────┘    │ y=148 (rounded bottom 40px)
+│                                     │
+│  ┌─────────────────────────────┐    │ y=180, x=24, w=342, h=88
+│  │ COLLECTIONS CARD (purple)   │    │
+│  │ ┌────┐                      │    │
+│  │ │ 📚 │ Koleksiyonlarım    > │    │ icon x=44, text x=108
+│  │ └────┘ 0 koleksiyonlar      │    │
+│  └─────────────────────────────┘    │ y=268
+│                                     │
+│  x=24: "Tüm Programlar"             │ y=300, label gray uppercase
+│                                     │
+│  ┌──────────┐  ┌──────────┐         │ y=332, x=24, gap=16
+│  │Photoshop │  │ Blender  │         │ w=163, h=172
+│  │   ⭐     │  │          │         │
+│  └──────────┘  └──────────┘         │ y=504
+│                                     │
+│  ┌──────────┐  ┌──────────┐         │ y=520
+│  │ SketchUp │  │Illustr.  │         │
+│  └──────────┘  └──────────┘         │ y=692
+│                                     │
+│  ... (scrollable, 16 programs)      │
+│                                     │
+├─────────────────────────────────────┤ y=764
+│ ┌───────────────────────────────┐   │ x=20, y=764, w=350, h=60
+│ │    🏠 Ana Sayfa  │ 🔖 Kayıtlı │   │ rounded 30px, blur bg
+│ │    [SELECTED]    │            │   │ selected = blue pill
+│ └───────────────────────────────┘   │
+└─────────────────────────────────────┘ y=844
 
-FAVORITES SECTION:
-- Section title: "Favorite Programs" (small, uppercase, gray)
-- Horizontal scrollable list of program cards
-- Each card: 140px wide, contains program icon and name
-- Star icon in corner for favorites
-
-ALL PROGRAMS SECTION:
-- Section title: "All Programs"
-- 2-column grid of program cards
-- Each card: Program logo/icon, program name, favorite star
-- Cards have subtle shadow and rounded corners (16px)
-- Example programs: Photoshop, Excel, Word, AutoCAD, Blender, VS Code, Figma
-
-BOTTOM NAVIGATION:
-- Floating bottom bar with rounded corners
-- Two tabs: Home (house icon) and Saved (bookmark icon)
-- Selected tab has highlighted background
-- Glass/blur effect background
-
-Style: Clean, minimal, premium feel. Dark mode version with deep navy background.
+PROGRAM CARD DETAIL (163x172px):
+┌───────────────────────┐
+│                    ⭐ │ star: top-right, 8px margin
+│                       │
+│         [LOGO]        │ logo: centered, 48px
+│                       │
+│      Photoshop        │ name: centered, 14px bold
+│                       │
+└───────────────────────┘ rounded 20px, border 1px
 ```
 
 ---
 
-## 📱 EKRAN 2: KOMUT LİSTESİ (Command Listing Screen)
-
-### Prompt:
+## 📱 EKRAN 2: KOMUT LİSTESİ
 
 ```
-Design a command listing screen for a software reference app.
+Mobile app screen: 390x844px, dark mode
 
-HEADER:
-- Back button (arrow in rounded container)
-- Program name as title (e.g., "Photoshop")
-- Toggle switch to filter "Shortcuts Only" vs "All Commands"
-- Sticky header that stays visible on scroll
+┌─────────────────────────────────────┐ y=0
+│         STATUS BAR (44px)           │
+├─────────────────────────────────────┤ y=44
+│                                     │
+│  ┌────┐                   ┌──────┐  │ y=60
+│  │ ← │  Photoshop        │Kısayol│  │ back btn x=24, toggle x=280
+│  └────┘                   └──────┘  │ back 44x44, toggle 86x36
+│                                     │
+│  ┌─────────────────────────────┐    │ y=120, x=24, w=342, h=48
+│  │ 🔍  Ara...                  │    │ search bar, rounded 16px
+│  └─────────────────────────────┘    │ y=168
+│                                     │
+│  COMMAND LIST (scrollable):         │ y=184
+│                                     │
+│  ┌─────────────────────────────┐    │ y=184, x=24, w=342, h=72
+│  │ ┌────┐                      │    │
+│  │ │icon│ Copy                 │    │ icon 48x48, x=16
+│  │ │    │ ┌───┐            >   │    │ badge x=80, chevron x=310
+│  │ └────┘ │ C │                │    │ badge = shortcut pill
+│  └─────────────────────────────┘    │ y=256, rounded 20px
+│                                     │
+│  ┌─────────────────────────────┐    │ y=268, gap=12
+│  │ ┌────┐                      │    │
+│  │ │icon│ Paste                │    │
+│  │ │    │ ┌───┐            >   │    │
+│  │ └────┘ │ V │                │    │
+│  └─────────────────────────────┘    │ y=340
+│                                     │
+│  ┌─────────────────────────────┐    │ y=352
+│  │ ┌────┐                      │    │
+│  │ │icon│ Undo                 │    │
+│  │ │    │ ┌─────────┐      >   │    │
+│  │ └────┘ │ Ctrl+Z  │          │    │
+│  └─────────────────────────────┘    │ y=424
+│                                     │
+│  ... (more commands)                │
+│                                     │
+├─────────────────────────────────────┤ y=764
+│ ┌───────────────────────────────┐   │
+│ │    🏠 Ana Sayfa  │ 🔖 Kayıtlı │   │
+│ └───────────────────────────────┘   │
+└─────────────────────────────────────┘ y=844
 
-SEARCH BAR:
-- Large search input with magnifying glass icon
-- Placeholder: "Search commands..."
-- Rounded corners, subtle border
-
-COMMAND LIST:
-- Vertical list of command cards
-- Each command card contains:
-  - Left: Custom icon representing the command (e.g., copy icon, paste icon)
-  - Center:
-    - Command name (bold, e.g., "Copy")
-    - Keyboard shortcut in pill/badge (e.g., "Ctrl + C")
-  - Right: Chevron arrow
-- Cards have subtle shadows and hover states
-- Alternating subtle background tints for readability
-
-FILTER TABS (when toggled):
-- Highlight commands that have shortcuts
-- Visual distinction between shortcut and non-shortcut commands
-
-EMPTY STATE:
-- Illustration of search
-- Message: "No commands found"
-- Suggestion to try different keywords
-
-Style: Clean list design, easy to scan, touch-friendly tap targets.
-```
-
----
-
-## 📱 EKRAN 3: KAYITLI KOMUTLAR (Saved Commands Screen)
-
-### Prompt:
-
-```
-Design a "My Saved Commands" screen for a software reference app.
-
-HEADER:
-- Title: "My Commands" (large, bold)
-- Subtitle: "Your personalized command library"
-- Settings gear icon button (top right)
-- Collections folder icon button (next to settings)
-
-EMPTY STATE (if no saved commands):
-- Large bookmark icon with dotted border
-- Message: "No saved commands yet"
-- Subtitle: "Browse programs and save your favorite commands"
-- CTA button: "Browse Programs"
-
-SAVED COMMANDS LIST (when has items):
-- Cards grouped by program
-- Each card shows:
-  - Program icon/initial
-  - Command name
-  - Shortcut badge
-  - Star (filled, yellow) indicating it's saved
-- Swipe to delete functionality hint
-
-COLLECTIONS QUICK ACCESS:
-- Horizontal row of collection chips/pills
-- Each shows collection name and count
-- Tappable to filter
-
-Style: Personal, organized, easy to manage saved items.
+COMMAND CARD DETAIL (342x72px):
+┌─────────────────────────────────────────┐
+│ ┌──────┐                                │
+│ │ ICON │  Command Name              >   │ icon: x=16, 48x48
+│ │      │  ┌─────────┐                   │ name: x=80, 16px bold
+│ └──────┘  │ Ctrl+X  │                   │ badge: x=80, y=40
+└─────────────────────────────────────────┘ badge: blue bg, 12px white
 ```
 
 ---
 
-## 📱 EKRAN 4: KOMUT DETAY (Command Detail Sheet)
-
-### Prompt:
+## 📱 EKRAN 3: KOMUT DETAY (Bottom Sheet)
 
 ```
-Design a bottom sheet modal for command details.
+Bottom sheet: 390x717px (85% of screen), slides up
 
-MODAL DESIGN:
-- Slides up from bottom
-- Rounded top corners (32px)
-- Drag handle at top (small gray bar)
-- Takes up 85% of screen height
+┌─────────────────────────────────────┐ y=127 (starting point)
+│ ┌─────────────────────────────────┐ │
+│ │           ━━━━━━━━              │ │ drag handle: y=12, 48x4px
+│ └─────────────────────────────────┘ │ centered, gray
+│                                     │
+│  ┌────┐                       ✕     │ y=44
+│  │ P  │  Copy                       │ initial box: x=24, 48x48
+│  │    │  Photoshop Komutu           │ gradient blue bg
+│  └────┘                             │ close btn: x=342, 32x32
+│                                     │
+│  ═══════════════════════════════    │ y=108
+│                                     │
+│              ┌────────┐             │ y=140
+│              │  ICON  │             │ centered, 72x72
+│              │ (copy) │             │
+│              └────────┘             │ y=212
+│                                     │
+│                 C                   │ y=236, centered
+│              (96px blue)            │ y=332
+│                                     │
+│          ┌─────────────┐            │ y=356
+│          │ Edit > Copy │            │ breadcrumb pill, centered
+│          └─────────────┘            │ light blue bg, blue text
+│                                     │
+│  AÇIKLAMA                           │ y=420, x=24, gray uppercase
+│  ─────────                          │
+│  Seçili içeriği panoya kopyalar.    │ y=444, x=24, 16px
+│  Bu komutu kullanarak metin,        │
+│  görsel veya diğer öğeleri          │
+│  kolayca taşıyabilirsiniz.          │
+│                                     │
+│  NOTLARIM                           │ y=540, x=24, gray uppercase
+│  ─────────                          │
+│  ┌─────────────────────────────┐    │ y=564, x=24, w=342
+│  │ Not yaz...              📝  │    │ text input, rounded 16px
+│  └─────────────────────────────┘    │ h=48
+│                                     │
+│  ═══════════════════════════════    │ y=636
+│                                     │
+│  ┌──────────────┐ ┌──────────────┐  │ y=652
+│  │   📚 Ekle    │ │  ⭐ Kaydet   │  │ x=24, w=163, h=56
+│  └──────────────┘ └──────────────┘  │ gap=12, rounded 28px
+│                                     │
+└─────────────────────────────────────┘ y=844
 
-HEADER ROW:
-- Program icon/initial in gradient square
-- Command name (large, bold)
-- Subtitle: "Photoshop Command"
-- X close button (circle)
-
-MAIN CONTENT:
-- Large icon representing the command (centered, 72px)
-- HUGE shortcut letter display (96px font, blue color, e.g., "C")
-- Breadcrumb pill showing menu path: "Edit > Copy" in light blue
-
-DESCRIPTION SECTION:
-- Label: "DESCRIPTION" (small, uppercase, gray)
-- Full description text (16px, readable line height)
-
-NOTES SECTION:
-- Label: "NOTES" (small, uppercase, gray)
-- Text input field with placeholder "Add your notes..."
-- Pencil/note icon
-- User can type personal notes
-
-BOTTOM ACTION BAR:
-- Two buttons side by side:
-  1. "Add to" - Collections button (gray background)
-  2. "Save" / "Saved" - Favorite button
-     - Unsaved: Star outline, gray
-     - Saved: Filled star, yellow background, yellow border
-- Buttons are pill-shaped (28px radius)
-
-Style: Focused detail view, easy to read, clear visual hierarchy.
-```
-
----
-
-## 📱 EKRAN 5: AYARLAR (Settings Modal)
-
-### Prompt:
-
-```
-Design a settings bottom sheet modal.
-
-MODAL DESIGN:
-- Extra rounded top corners (48px)
-- Premium feel with shadows
-- Drag handle
-
-HEADER:
-- Title: "Settings" (large)
-- X close button
-
-DARK MODE TOGGLE:
-- Card with icon (sun/moon)
-- Label: "Dark Mode" or "Light Mode"
-- Custom toggle switch (pill shape with sliding circle)
-- Blue when active, gray when inactive
-
-LANGUAGE SECTION:
-- Section title: "Language" (small, uppercase)
-- List of language options as cards:
-  - Flag emoji (🇹🇷, 🇬🇧, 🇸🇦)
-  - Language name
-  - Checkmark circle when selected
-  - Selected language has blue border highlight
-
-CLOSE BUTTON:
-- Full-width button at bottom
-- Dark background (or blue in dark mode)
-- "Close" text, white, bold
-- Rounded corners, shadow
-
-Style: Clean settings, easy toggles, clear language selection.
+BUTTONS (163x56px each):
+Left: gray bg, collections icon + "Ekle"
+Right:
+  - unsaved: gray bg, star outline + "Kaydet"
+  - saved: yellow tint, yellow border, filled star + "Kaydedildi"
 ```
 
 ---
 
-## 📱 EKRAN 6: KOLEKSİYONLAR (Collections Screen)
-
-### Prompt:
+## 📱 EKRAN 4: AYARLAR (Bottom Sheet)
 
 ```
-Design a collections management screen.
+Bottom sheet: 390x717px, extra rounded (48px)
 
-HEADER:
-- Back button
-- Title: "My Collections"
-- Add (+) button to create new collection
-
-COLLECTIONS LIST:
-- Vertical list of collection cards
-- Each card shows:
-  - Folder icon or custom color
-  - Collection name (bold)
-  - Item count: "12 commands"
-  - Chevron arrow
-- Cards have subtle shadows
-
-CREATE COLLECTION DIALOG:
-- Modal overlay
-- Text input for collection name
-- Color picker (optional, row of color circles)
-- Cancel and Create buttons
-
-EMPTY STATE:
-- Folder illustration
-- "No collections yet"
-- "Create your first collection to organize commands"
-- CTA: "Create Collection"
-
-COLLECTION DETAIL:
-- When tapped, shows commands in that collection
-- Similar to saved commands list
-- Ability to remove commands from collection
-
-Style: Organized, folder metaphor, easy management.
-```
-
----
-
-## 📱 EKRAN 7: PROGRAM KARTI (Program Card Component)
-
-### Prompt:
-
-```
-Design a program card component used in grids and lists.
-
-CARD DIMENSIONS:
-- Grid: ~160x170px (2 columns)
-- List: 140x180px (horizontal scroll)
-
-CARD CONTENT:
-- Program logo/icon centered (48-64px)
-- Program name below (14-16px, bold, 2 lines max)
-- Favorite star in top-right corner
-  - Outline when not favorite
-  - Filled yellow when favorite
-  - Tap to toggle
-
-CARD STYLE:
-- Background: White (light) / Dark gray (dark)
-- Border: 1px subtle gray
-- Border radius: 20-24px
-- Shadow: Subtle drop shadow
-- Hover/tap state: Slight scale up
-
-SELECTED STATE:
-- Blue border
-- Subtle blue background tint
-
-Example programs to show:
-- Adobe Photoshop (Ps icon)
-- Microsoft Excel (green spreadsheet icon)
-- Blender (orange icon)
-- AutoCAD (A icon)
-- VS Code (blue brackets icon)
-- Figma (purple icon)
-
-Style: App-icon like, consistent sizing, premium feel.
+┌─────────────────────────────────────┐ y=127
+│              ━━━━━━━━               │ drag handle
+│                                     │
+│  Ayarlar                       ✕    │ y=52, title x=32, close x=334
+│                                     │
+│  ┌─────────────────────────────┐    │ y=100, x=32, w=326
+│  │  ┌────┐                     │    │
+│  │  │ 🌙 │  Koyu Mod    ○───●  │    │ icon 36x36, toggle x=270
+│  │  └────┘                     │    │ toggle: 48x28, blue when ON
+│  └─────────────────────────────┘    │ h=64, rounded 24px
+│                                     │
+│  Dil                                │ y=188, x=32, gray uppercase
+│                                     │
+│  ┌─────────────────────────────┐    │ y=212, x=32, w=326
+│  │  🇺🇸  English               │    │ h=56, rounded 24px
+│  └─────────────────────────────┘    │ gap=8
+│                                     │
+│  ┌─────────────────────────────┐    │ y=276
+│  │  🇹🇷  Türkçe            ✓   │    │ SELECTED: blue border
+│  └─────────────────────────────┘    │ checkmark x=298
+│                                     │
+│  ┌─────────────────────────────┐    │ y=340
+│  │  🇸🇦  العربية               │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ┌─────────────────────────────┐    │ y=404
+│  │  🇷🇺  Русский               │    │
+│  └─────────────────────────────┘    │
+│                                     │
+│  ... (scrollable, 15 languages)     │
+│                                     │
+│  ═══════════════════════════════    │
+│                                     │
+│  ┌─────────────────────────────┐    │ y=768, x=32, w=326
+│  │           Kapat             │    │ h=52, rounded 24px
+│  └─────────────────────────────┘    │ dark bg, white text
+│                                     │
+└─────────────────────────────────────┘ y=844
 ```
 
 ---
 
-## 📱 EKRAN 8: BOTTOM NAVIGATION
-
-### Prompt:
+## 📱 EKRAN 5: KOLEKSİYONLAR
 
 ```
-Design a floating bottom navigation bar.
+Full screen: 390x844px
 
-DIMENSIONS:
-- Width: ~90% of screen width
-- Height: ~60px
-- Positioned 20px from bottom
-- Centered horizontally
-
-STYLE:
-- Rounded corners (30px)
-- Background: White with slight blur (light mode)
-- Background: Dark gray with blur (dark mode)
-- Subtle shadow
-- 1px border
-
-TABS:
-- 2 tabs: Home and Saved
-- Each tab:
-  - Icon (house, bookmark)
-  - Label below icon
-- Selected tab:
-  - Blue/purple background pill
-  - White icon and text
-- Unselected tab:
-  - Gray icon and text
-
-ANIMATION:
-- Smooth transition between tabs
-- Selected indicator slides
-
-Style: Floating, modern, iOS-like tab bar feel.
+┌─────────────────────────────────────┐ y=0
+│         STATUS BAR (44px)           │
+├─────────────────────────────────────┤ y=44
+│                                     │
+│  ←     Koleksiyonlar                │ y=60, back x=24, title centered
+│                                     │
+│  ═══════════════════════════════    │ y=100
+│                                     │
+│  IF EMPTY:                          │
+│                                     │
+│              ┌────┐                 │ y=300, centered
+│              │ 📚 │                 │ 64x64, gray, pulsing
+│              └────┘                 │
+│                                     │
+│     Henüz Koleksiyon Yok            │ y=388, centered, 20px
+│                                     │
+│  İlk koleksiyonunu aşağıdan oluştur │ y=420, centered, 14px gray
+│                                     │
+│  ═══════════════════════════════    │
+│                                     │
+│  IF HAS COLLECTIONS:                │
+│                                     │
+│  ┌─────────────────────────────┐    │ y=116, x=24, w=342, h=80
+│  │ ┌────┐                      │    │ gradient bg (purple/blue)
+│  │ │ 📁 │ İş Komutları       > │    │ folder icon: 48x48
+│  │ └────┘ 5 komut              │    │ rounded 28px, shadow
+│  └─────────────────────────────┘    │ y=196
+│                                     │
+│  ┌─────────────────────────────┐    │ y=208, gap=12
+│  │ ┌────┐                      │    │ different gradient
+│  │ │ 📁 │ Favorilerim        > │    │
+│  │ └────┘ 12 komut             │    │
+│  └─────────────────────────────┘    │ y=288
+│                                     │
+│  ... (more collections)             │
+│                                     │
+│                                     │
+│                    ┌─────────────┐  │ FAB: x=262, y=756
+│                    │ + Yeni Oluş.│  │ w=104, h=48
+│                    └─────────────┘  │ blue bg, pill shape
+│                                     │
+└─────────────────────────────────────┘ y=844
 ```
 
 ---
 
-## 🌙 DARK MODE VARIATIONS
+## 🎨 RENK KODLARI
 
-Tüm ekranlar için dark mode versiyonu da tasarlanmalı:
-
-- Background: #0F172A (deep navy)
-- Card background: #1E293B
-- Text: White, 90% opacity
-- Secondary text: 60% opacity white
-- Borders: #334155
-- Keep accent colors similar (blues, purples)
-
----
-
-## 📐 DESIGN SYSTEM NOTES
-
-**Spacing:**
-
-- Base unit: 8px
-- Padding: 16px, 24px, 32px
-- Card gaps: 16px
-
-**Typography:**
-
-- Headings: Bold, -0.5 letter spacing
-- Body: Regular, 1.5 line height
-- Labels: Small, uppercase, letter-spacing 1px
-
-**Shadows:**
-
-- Cards: 0 2px 10px rgba(0,0,0,0.05)
-- Buttons: 0 8px 20px with color tint
-
-**Animations:**
-
-- Duration: 300-400ms
-- Easing: ease-out
-- Slide distance: 20-30%
+```
+Dark Mode Arka Plan:     #0F172A
+Kart Arka Plan:          #1E293B
+Border:                  #334155
+Birincil Mavi:           #2563EB
+Mor Gradient Başı:       #8B5CF6
+Mor Gradient Sonu:       #6366F1
+Favori Sarı:             #FBBF24
+Başlık Beyaz:            #FFFFFF
+Alt Metin:               rgba(255,255,255,0.6)
+```
 
 ---
 
-Bu promptları kullanarak her ekran için UI tasarımı oluşturulabilir.
+Bu ASCII wireframe + koordinat sistemi ile tasarımcı tam olarak neyin nerede olduğunu görebilir.

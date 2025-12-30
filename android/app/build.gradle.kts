@@ -10,6 +10,10 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    dependencies {
+        implementation("androidx.multidex:multidex:2.0.1")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -25,30 +29,24 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
     }
 
-    // Signing configuration - TODO: Create keystore file
-    // Uncomment when keystore is ready:
-    // 
-    // val keystorePropertiesFile = rootProject.file("key.properties")
-    // val keystoreProperties = Properties()
-    // keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-    //
-    // signingConfigs {
-    //     create("release") {
-    //         keyAlias = keystoreProperties["keyAlias"] as String
-    //         keyPassword = keystoreProperties["keyPassword"] as String
-    //         storeFile = file(keystoreProperties["storeFile"] as String)
-    //         storePassword = keystoreProperties["storePassword"] as String
-    //     }
-    // }
+    // Signing configuration for release builds
+    signingConfigs {
+        create("release") {
+            storeFile = file("../linelibrary-release.jks")
+            storePassword = "linelibrary2024"
+            keyAlias = "linelibrary"
+            keyPassword = "linelibrary2024"
+        }
+    }
 
     buildTypes {
         release {
-            // Using debug keys temporarily - Replace with proper signing
-            signingConfig = signingConfigs.getByName("debug")
-            // Uncomment when keystore is ready:
-            // signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

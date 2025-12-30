@@ -48,6 +48,13 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
     final isFavorite = appState.isCommandFavorite(widget.command.id);
     final programName = appState.selectedProgramName ?? 'Program';
 
+    // Find the current program to get its brand color
+    final currentProgram = appState.allPrograms.firstWhere(
+      (p) => p.name == programName,
+      orElse: () => appState.allPrograms.first,
+    );
+    final brandColor = currentProgram.brandColor;
+
     return Directionality(
       textDirection: isRTL ? TextDirection.rtl : TextDirection.ltr,
       child: Container(
@@ -64,101 +71,108 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Handle
+            // Dynamic Header Section
             Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 20),
-              width: 48,
-              height: 4,
               decoration: BoxDecoration(
-                color: isDark ? AppColors.darkBorder : const Color(0xFFE5E7EB),
-                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                  colors: [brandColor.withValues(alpha: 0.9), brandColor],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                  topRight: Radius.circular(32),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: brandColor.withValues(alpha: 0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            ),
-
-            // Header (Program Icon + Name + Close)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 20),
+              child: Column(
                 children: [
-                  // Program Initial Letter
+                  // Handle
                   Container(
+                    margin: const EdgeInsets.only(bottom: 16),
                     width: 48,
-                    height: 48,
+                    height: 4,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF6366F1).withValues(alpha: 0.8),
-                          const Color(0xFF6366F1),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF6366F1).withValues(alpha: 0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        programName[0].toUpperCase(),
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      color: Colors.white.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  const SizedBox(width: 16),
 
-                  // Title
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.command.name,
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                  // Header Row
+                  Row(
+                    children: [
+                      // Program Initial Letter (white bg)
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        Text(
-                          "$programName ${t.translate('programCommand')}", // e.g. AutoCAD Command
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: isDark ? Colors.white60 : Colors.black54,
+                        child: Center(
+                          child: Text(
+                            programName[0].toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                      const SizedBox(width: 16),
 
-                  // Close Button
-                  GestureDetector(
-                    onTap: () {
-                      appState.selectCommand(null);
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.white.withValues(alpha: 0.05)
-                            : const Color(0xFFF3F4F6),
-                        shape: BoxShape.circle,
+                      // Title
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.command.name,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              "$programName ${t.translate('programCommand')}",
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.white.withValues(alpha: 0.8),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Icon(
-                        Icons.close,
-                        size: 20,
-                        color: isDark ? Colors.white70 : Colors.black54,
+
+                      // Close Button
+                      GestureDetector(
+                        onTap: () {
+                          appState.selectCommand(null);
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
@@ -197,10 +211,10 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                     child:
                         Text(
                           widget.command.shortcut,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 96,
                             fontWeight: FontWeight.w900,
-                            color: Color(0xFF2563EB), // Premium Blue
+                            color: brandColor, // Use brandColor
                             height: 1.0,
                           ),
                         ).animate().scale(
@@ -221,7 +235,9 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEFF6FF), // Light Blue
+                        color: brandColor.withValues(
+                          alpha: 0.1,
+                        ), // Use brandColor light
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -230,8 +246,8 @@ class _CommandDetailSheetState extends State<CommandDetailSheet> {
                           Flexible(
                             child: Text(
                               widget.command.breadcrumb,
-                              style: const TextStyle(
-                                color: Color(0xFF2563EB),
+                              style: TextStyle(
+                                color: brandColor, // Use brandColor
                                 fontWeight: FontWeight.w600,
                                 fontSize: 13,
                               ),
