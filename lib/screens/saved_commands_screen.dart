@@ -4,7 +4,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../providers/app_state_provider.dart';
 import '../theme/app_colors.dart';
 import '../l10n/app_localizations.dart';
-import '../models/command.dart';
 import 'collections_screen.dart';
 import '../widgets/settings_modal.dart';
 
@@ -120,7 +119,9 @@ class SavedCommandsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF6366F1).withValues(alpha: 0.3),
+                              color: const Color(
+                                0xFF6366F1,
+                              ).withValues(alpha: 0.3),
                               blurRadius: 10,
                               offset: const Offset(0, 2),
                             ),
@@ -213,7 +214,9 @@ class SavedCommandsScreen extends StatelessWidget {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withValues(alpha: 0.03),
+                                        color: Colors.black.withValues(
+                                          alpha: 0.03,
+                                        ),
                                         blurRadius: 8,
                                         offset: const Offset(0, 2),
                                       ),

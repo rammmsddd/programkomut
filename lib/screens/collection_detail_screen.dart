@@ -14,7 +14,6 @@ class CollectionDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppStateProvider>();
-    final t = AppLocalizations(appState.languageCode);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isRTL = AppLocalizations.supportedLanguages
         .firstWhere((l) => l.code == appState.languageCode)
@@ -166,7 +165,9 @@ class CollectionDetailScreen extends StatelessWidget {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.03),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.03,
+                                      ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),

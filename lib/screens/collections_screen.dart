@@ -87,7 +87,6 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppStateProvider>();
-    final t = AppLocalizations(appState.languageCode);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isRTL = AppLocalizations.supportedLanguages
         .firstWhere((l) => l.code == appState.languageCode)
@@ -197,7 +196,9 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withValues(alpha: 0.03),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.03,
+                                      ),
                                       blurRadius: 8,
                                       offset: const Offset(0, 2),
                                     ),
@@ -212,8 +213,8 @@ class _CollectionsScreenState extends State<CollectionsScreen> {
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: [
-                                            AppColors.accentBlue.withOpacity(
-                                              0.8,
+                                            AppColors.accentBlue.withValues(
+                                              alpha: 0.8,
                                             ),
                                             AppColors.accentBlue,
                                           ],

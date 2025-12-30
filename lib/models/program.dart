@@ -20,7 +20,7 @@ class Program {
     'id': id,
     'name': name,
     'imageUrl': imageUrl,
-    'brandColor': brandColor.value,
+    'brandColor': brandColor.toARGB32(),
     'commands': commands.map((c) => c.toJson()).toList(),
   };
 
