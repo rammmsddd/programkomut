@@ -13,10 +13,15 @@ workflows:
       xcode: latest
       cocoapods: default
       groups:
-        - app_store_credentials # Apple credentials (set in Codemagic UI)
+        - app_store_credentials
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.linelibrary.app
       vars:
-        BUNDLE_ID: "com.linelibrary.app" # Update with your bundle ID
-        APP_STORE_APP_ID: "YOUR_APP_ID" # Update after creating app in App Store Connect
+        BUNDLE_ID: "com.linelibrary.app"
+
+    integrations:
+      app_store_connect: Codemagic
 
     scripts:
       - name: Get Flutter packages
@@ -26,7 +31,7 @@ workflows:
       - name: Set up code signing
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create --certificate-key=@env:APP_STORE_CONNECT_PRIVATE_KEY
           keychain add-certificates
 
       - name: Install CocoaPods
